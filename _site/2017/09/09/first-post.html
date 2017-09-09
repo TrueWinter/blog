@@ -222,24 +222,29 @@
 <p>And if you want to know how to set up your own blog with the NetlifyCMS, follow the article I did here.</p>
 
 <hr>
-<div class="comments"></div>
-<h3>Leave a comment</h3>
-<p><i>Just no spam please, don't want to have to add in a captcha or remove comments</i></p>
+	<a href="/">Back to the blog's home page</a><br>
+<h2>Comments</h2>
+<div id="disqus_thread"></div>
+<script>
 
-<div id="jsresponse" class="error"></div>
-<form id="comment">
-
-  <label for="name">Name</label>
-  <input type="text" id="name">
-
-  <label for="email">Email</label>
-  <input type="text" id="email">
-
-  <label for="message">Message</label>
-  <textarea id="message"></textarea>
-
-  <input type="button" id="submitbtn" class="submit-button" value="Post Comment">
-</form>
+/**
+*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+/*
+var disqus_config = function () {
+this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+*/
+(function() { // DON'T EDIT BELOW THIS LINE
+var d = document, s = d.createElement('script');
+s.src = 'https://ndt3-blog.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+        <script id="dsq-count-scr" src="//ndt3-blog.disqus.com/count.js" async></script>                    
   </div>
 
   
@@ -247,7 +252,7 @@
 
 
       <footer class="site-footer">
-	<a href="/">Back to the blog's home page</a><br>
+
         <!-- SVG icons from https://iconmonstr.com -->
 
         <!-- Github icon -->
@@ -275,10 +280,10 @@
 
     
 
-<script src="https://cdn.firebase.com/js/client/2.2.1/firebase.js"></script>
+<!--<script src="https://cdn.firebase.com/js/client/2.2.1/firebase.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 <script src="https://momentjs.com/downloads/moment.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/blueimp-md5/2.1.0/js/md5.js"></script>
-<script src="/js/blog.js"></script>
+<script src="/js/blog.js"></script>-->
   </body>
 </html>
