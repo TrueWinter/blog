@@ -14,9 +14,10 @@
 # You can create any custom variable you would like, and they will be accessible
 # in the templates via {{ site.myvariable }}.
 title: NdT3 Blog
+author: NdT3Development
 email: admin@ndt3.ml
 description: > # this means to ignore newlines until "baseurl:"
-  
+  NdT3Development's Blog
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "https://blog.ndt3.ml" # the base hostname & protocol for your site, e.g. http://example.com
 twitter_username: NdT3_
