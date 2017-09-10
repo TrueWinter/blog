@@ -21,6 +21,7 @@ baseurl: "" # the subpath of your site, e.g. /blog
 url: "https://blog.ndt3.ml" # the base hostname & protocol for your site, e.g. http://example.com
 twitter_username: NdT3_
 github_username:  NdT3Development
+google_analytics: UA-104398508-3
 
 # Build settings
 markdown: kramdown
