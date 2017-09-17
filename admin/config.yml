@@ -4,6 +4,7 @@ backend:
   branch: master
   site_domain: blog.ndt3.ml
 media_folder: "images/uploads"
+publish_mode: editorial_workflow
 collections:
   - name: "post" # Used in routes, e.g. /admin/collections/blog
     label: "Post" # Used in the UI
