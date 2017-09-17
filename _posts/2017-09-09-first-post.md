@@ -1,6 +1,6 @@
 ---
 layout: post
-title: First Post
+title: How I Set Up All of This
 ---
 This is my first post on this blog. I have decided that in this post, I will give more details about how I have set up my website and blog.
 
@@ -15,3 +15,4 @@ You may have noticed that my website has a contact form. As you may know, static
 This blog has its content hosted on GitHub but is served from [Netlify ](https://netlify.com). *Just trying something new…* To post on this blog, I use the [NetlifyCMS](https://www.netlifycms.org/). This allows me to easily post without having to worry about pushing to GitHub or writing in markdown.
 
 And if you want to know how to set up your own blog with the NetlifyCMS, follow the article I did here.
+
