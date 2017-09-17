@@ -13,6 +13,12 @@ Paragraph
 ```sh
 git clone https://github.com/NdT3Development/NdT3Blog.git
 ```
+
+```javascript
+var hi = "hi";
+```
+
 [My GitHub](https://github.com/NdT3Development)
 
 [![My avatar](https://ndt3.ml/favicon.png)](https://ndt3.ml/favicon.png)
+
