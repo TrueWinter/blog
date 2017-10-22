@@ -10,9 +10,10 @@ I also added some new code for redirects. Now, instead of having to change JavaS
 - I did not want to have to look through a single file's JavaScript code to find, change or add more redirects.
 - I also didn't like the old redirects, the URLs used to look like `https://ndt3.ml/out?to=blog`. With the new redirect system, the URLs will look like `https://ndt3.ml/r/blog`. That looks a lot better.
 
-Reasons for the switch to NetlifyCMS:
+Reasons for the switch to Netlify:
 - I wanted to be able to use NetlifyCMS to easily change or add new redirects.
 - Netlify has support for SSL for custom domains. It may not be a feature that I will be using for now as I use CloudFlare for this but it may come in helpful in the future.
 
 
 There may have been other changes that I missed out and I don't really know if these changes were worth a blog post but here it is.
+
