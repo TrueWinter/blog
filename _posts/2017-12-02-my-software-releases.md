@@ -37,8 +37,9 @@ Before I end off this article, I just want to say that I have social media accou
 
 **GitHub:** [NdT3Development](https://github.com/NdT3Development)
 
-**Twitter:** [NdT3_](https://twitter.com/NdT3_)
+**Twitter:** [NdT3\_](https://twitter.com/NdT3\_)
 
 **Support Server on [Discord](https://discordapp.com):** [https://discord.gg/7Yz9byx](https://discord.gg/7Yz9byx)
 
 I also accept donations on Patreon: [My Patreon Page](https://patreon.com/NdT3)
+
