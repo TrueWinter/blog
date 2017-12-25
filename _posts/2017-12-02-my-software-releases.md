@@ -29,7 +29,7 @@ which would return an array containing 5 numbers between 1 and 10. This module c
 
 **NdT3Utils:** A utility program that includes some useful tools such as an easy way to make a post request. **NOTE:** This may not be released due to issues with the code with some utilities that can't easily be fixed.
 
-**Status Page ** *(Name not yet decided)*: After much searching for a Node.js open source status page for monitoring my (private) APIs, I have decided to attempt to create my own. Unfortunately, it isn't as easy as one might think. There are many issues that you will face if you try to make one of these, some of them not that easy to fix.
+**Status Page** *(Name not yet decided)*: After much searching for a Node.js open source status page for monitoring my (private) APIs, I have decided to attempt to create my own. Unfortunately, it isn't as easy as one might think. There are many issues that you will face if you try to make one of these, some of them not that easy to fix.
 
 Do you have any ideas for open source software that I could make with Node.js? Please leave them in the comments and I may choose one of them as my next project.
 
@@ -42,6 +42,7 @@ Before I end off this article, I just want to say that I have social media accou
 **Support Server on [Discord](https://discordapp.com):** [https://discord.gg/scHhZcK](https://discord.gg/scHhZcK)
 
 I also accept donations on Patreon: [My Patreon Page](https://patreon.com/NdT3)
+
 
 
 
