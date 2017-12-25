@@ -45,7 +45,8 @@ Before I end off this article, I just want to say that I have social media accou
 [https://l.ndt3.ml/ndt3-discord](https://l.ndt3.ml/ndt3-discord) or
 [https://discord.gg/scHhZcK](https://discord.gg/scHhZcK)
 
-I also accept donations on Patreon: [My Patreon Page](https://patreon.com/NdT3)
+~~I also accept donations on Patreon: [My Patreon Page](https://patreon.com/NdT3)~~ Due to a reason that I do not want to discuss here, I cannot accept donations on Patreon.
+
 
 
 
