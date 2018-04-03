@@ -23,7 +23,7 @@ url: "https://blog.ndt3.ml" # the base hostname & protocol for your site, e.g. h
 twitter_username: NdT3_
 github_username:  NdT3Development
 google_analytics: UA-104398508-3
-image: favicon.png
+image: /favicon.png
 
 # Build settings
 markdown: kramdown
