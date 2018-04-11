@@ -92,14 +92,7 @@ window.cookieconsent.initialise({
           {% assign date_format = site.cayman-blog.date_format | default: "%b %-d, %Y" %}
           {{ page.date | date: date_format }}
 		</strong> | <strong>Reading Time: <span id="rTime"></span></strong>
-			    <script>
-		    var wpm = 200;
-var words = document.getElementsByTagName('article')[0].innerText.split(' ').length;
-var rT = Math.round(words / wpm);
-var rTm = rT.toString().split('.')[0] + ' minutes';
-console.log(rTm);
-document.getElementById('rTime').innerText = rTm;
-	    </script>
+			    
         </p>
       {% endif %}
 
