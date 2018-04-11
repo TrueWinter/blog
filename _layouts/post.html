@@ -2,14 +2,7 @@
 layout: default
 ---
 <article itemscope itemtype="http://schema.org/BlogPosting">
-	<script>
-		    var wpm = 200;
-var words = document.getElementsByTagName('article')[0].innerText.split(' ').length;
-var rT = Math.round(words / wpm);
-var rTm = rT.toString().split('.')[0] + ' minutes';
-console.log(rTm);
-document.getElementById('rTime').innerText = rTm;
-	    </script>
+	
 <style>
     input[type=text], input[type=email], textarea {
         width: 100%;
@@ -80,6 +73,15 @@ document.getElementById('rTime').innerText = rTm;
   <div itemprop="articleBody">
     {{ content }}
 <hr>
+	  <script>
+		    var wpm = 200;
+var words = document.getElementsByTagName('article')[0].innerText;
+var wordCount = words.split(' ').length;
+var rT = Math.round(wordCount / wpm);
+var rTm = rT.toString().split('.')[0] + ' minutes';
+console.log(rTm);
+document.getElementById('rTime').innerText = rTm;
+	    </script>
 	<a href="/">Back to the blog's home page</a><br>
 <h2>Comments</h2>
 <div id="disqus_thread"></div>
