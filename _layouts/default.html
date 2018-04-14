@@ -94,7 +94,7 @@ window.cookieconsent.initialise({
 		</strong> | <strong>Reading Time: <span id="rTime"></span></strong>
 			    
         </p>
-	    <div class="ad" style="text-align: center;font-size: small;">Advertisement<center><iframe data-aa="887950" src="//ad.a-ads.com/887950?size=300x250" scrolling="no" style="width:300px; height:250px; border:0px; padding:0;overflow:hidden" allowtransparency="true"></iframe></center></div>
+	    <div class="ad" style="text-align: center;font-size: small;">Advertisement<center><iframe data-aa="887950" src="" data-src="//ad.a-ads.com/887950?size=300x250" scrolling="no" style="width:300px; height:250px; border:0px; padding:0;overflow:hidden" allowtransparency="true"></iframe></center></div>
       {% endif %}
 
       {{ content }}
@@ -151,5 +151,14 @@ window.cookieconsent.initialise({
         ga('send', 'pageview');
       </script>
     {% endif %}
+<script>
+function init() {
+var iframeDefer = document.getElementsByTagName('iframe');
+for (var i=0; i<iframeDefer.length; i++) {
+if(iframeDefer[i].getAttribute('data-src')) {
+iframeDefer[i].setAttribute('src',iframeDefer[i].getAttribute('data-src'));
+} } }
+window.onload = init;
+</script>
   </body>
 </html>
