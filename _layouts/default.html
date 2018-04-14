@@ -12,6 +12,11 @@
       {% assign page-title = site.title | escape %}
 
     <title>{{ page-title }}</title>
+	  <style>
+		  .ad-ns {
+			  display:none;
+		  }
+	  </style>
 
     {% if site.gems contains "jekyll-seo-tag" %}
       <!-- jekyll-seo-tag -->
@@ -168,6 +173,10 @@ window.onload = init;
 .ad {
 display:none;
 }
+.ad-ns {
+display:unset
+}
 </style>
+	  </noscript>
   </body>
 </html>
