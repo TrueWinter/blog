@@ -21,6 +21,8 @@ GEM
       jekyll (~> 3.3)
     jekyll-sass-converter (1.5.0)
       sass (~> 3.4)
+    jekyll-sitemap (1.2.0)
+      jekyll (~> 3.3)
     jekyll-theme-cayman-blog (0.0.6)
       jekyll (~> 3.3)
     jekyll-watch (1.5.0)
@@ -51,8 +53,9 @@ PLATFORMS
 DEPENDENCIES
   jekyll (= 3.5.2)
   jekyll-feed (~> 0.6)
+  jekyll-sitemap
   jekyll-theme-cayman-blog
   tzinfo-data
 
 BUNDLED WITH
-   1.15.4
+   1.16.1
