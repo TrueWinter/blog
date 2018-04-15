@@ -74,16 +74,27 @@ layout: default
     {{ content }}
 <hr>
 	  <script>
-
+var mn=Math.round(document.getElementsByTagName('article')[0].innerText.split(' ').length/200);
+var mnh=0;
+var hn=0;
+if(mn=>60){hn=Math.floor(mn/60);mnh=mn-hn*60;}else{mnh=mn;}
+document.getElementById('rTime').innerText = ((hn?hn+(hn===1?' hour ':' hours '):'')+(mn%60===0?'':(mnh?mnh:mn)+(mnh===1?' minute':' minutes')));
 		  
-var wpm = 200;
+/*var wpm = 200;
 var words = document.getElementsByTagName('article')[0].innerText;
 var wordCount = words.split(' ').length;
 var rT = Math.round(wordCount / wpm);
 var rTm = rT.toString().split('.')[0] + ' minutes';
 console.log(rTm);
-document.getElementById('rTime').innerText = rTm;
+document.getElementById('rTime').innerText = rTm;*/
 	    </script>
+	  <noscript>
+		  <style>
+			  .readingTime {
+				  display:none;
+			  }
+		  </style>
+	  </noscript>
 	<a href="/">Back to the blog's home page</a><br>
 <div class="ad" style="text-align: center;font-size: small;">Advertisement<center><iframe data-aa="887950" src="" data-src="//ad.a-ads.com/887950?size=300x250" scrolling="no" style="width:300px; height:250px; border:0px; padding:0;overflow:hidden" allowtransparency="true"></iframe></center></div>
 <noscript>
