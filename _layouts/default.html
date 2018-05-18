@@ -175,13 +175,18 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       </script>
     {% endif %}
 <script>
-function init() {
-var iframeDefer = document.getElementsByTagName('iframe');
-for (var i=0; i<iframeDefer.length; i++) {
-if(iframeDefer[i].getAttribute('data-src')) {
-iframeDefer[i].setAttribute('src',iframeDefer[i].getAttribute('data-src'));
-} } }
-window.onload = init;
+function NdT3LazyLoad() {
+	var iframeDefer = document.getElementsByTagName('iframe');
+	var imageDefer = document.getElementsByTagName('img');
+	function defer(obj) {
+		for (var i=0; i<obj.length; i++) {
+			if(obj[i].getAttribute('data-src')) {
+				obj[i].setAttribute('src',obj[i].getAttribute('data-src'));
+			}
+		}
+	}
+}
+window.onload = NdT3LazyLoad;
 </script>
 <noscript>
 <style>
