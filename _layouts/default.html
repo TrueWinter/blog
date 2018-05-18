@@ -177,7 +177,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <script>
 function NdT3LazyLoad() {
 	var iframeDefer = document.getElementsByTagName('iframe');
-	var imageDefer = document.getElementsByTagName('img');
 	function defer(obj) {
 		for (var i=0; i<obj.length; i++) {
 			if(obj[i].getAttribute('data-src')) {
@@ -185,6 +184,7 @@ function NdT3LazyLoad() {
 			}
 		}
 	}
+	defer(iframeDefer);
 }
 window.onload = NdT3LazyLoad;
 </script>
