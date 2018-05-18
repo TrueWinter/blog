@@ -16,7 +16,7 @@ module Jekyll
     end
 
     def replace(content)
-      content.gsub!(/<img src=(?:'|")(.*)(?:'|")\s(.+=".+")*(\s\/)*>/i, '<img src=\'\' data-src=\'\1\' \2>')
+      content.gsub!(/!(\[.+\])\((.+)\)/i, '<img src=\'\' data-src=\'\2\' alt=\'\1\'>')
       content
     end
 
