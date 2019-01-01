@@ -23,9 +23,9 @@ which would return an array containing 5 numbers between 1 and 10. This module c
 
 **[NdT3Links](https://github.com/NdT3Development/NdT3Links):** This is a simple Node.js link shortener using [Knex.js](http://knexjs.org/) for creating database query strings and [sqlite3](https://www.npmjs.com/package/SQLite3) as the database.
 
-### Then there are some upcoming releases such as:
+**[CloudFlare DDNS](https://github.com/NdT3Development/CF-DDNS):** This will allow you to use CloudFlare as a DDNS. It will request an external website to get your IP address and update an A record on CloudFlare with the IP.
 
-**CloudFlare DDNS:** This module will allow you to use CloudFlare as a DDNS. It will request an external website to get your IP address and update an A record on CloudFlare with the IP.
+### Then there are some upcoming releases such as:
 
 **NdT3Utils:** A utility program that includes some useful tools such as an easy way to make a post request. **NOTE:** This may not be released due to issues with the code with some utilities that can't easily be fixed.
 
@@ -46,6 +46,7 @@ Before I end off this article, I just want to say that I have social media accou
 [https://discord.gg/scHhZcK](https://discord.gg/scHhZcK)
 
 ~~I also accept donations on Patreon: [My Patreon Page](https://patreon.com/NdT3)~~ Due to a reason that I do not want to discuss here, I cannot accept donations on Patreon.
+
 
 
 
