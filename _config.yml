@@ -19,7 +19,7 @@ email: admin@ndt3.ml
 description: > # this means to ignore newlines until "baseurl:"
   NdT3Development's Blog
 baseurl: "" # the subpath of your site, e.g. /blog
-url: "https://blog.ndt3.ml" # the base hostname & protocol for your site, e.g. http://example.com
+url: "https://blog.ndt3.me" # the base hostname & protocol for your site, e.g. http://example.com
 twitter_username: NdT3_
 github_username:  NdT3Development
 google_analytics: UA-104398508-3
