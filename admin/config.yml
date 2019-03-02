@@ -2,7 +2,7 @@ backend:
   name: github
   repo: NdT3Development/NdT3Blog
   branch: master
-  site_domain: blog.ndt3.ml
+  site_domain: blog.ndt3.me
 media_folder: "images/uploads"
 collections:
   - name: "post" # Used in routes, e.g. /admin/collections/blog
