@@ -22,7 +22,7 @@ layout: default
           <a class="post-link" href="{{ post.url | relative_url }}" title="{{ post.title }}">{{ post.title | escape }}</a>
         </h2>
 		        {% assign date_format = site.cayman-blog.date_format | default: "%b %-d, %Y" %}
-	<span class="post-meta">{{ post.date | date: date_format }} | <a href="{{ post.url }}#disqus_thread" data-disqus-identifier="{{post.id}}"> comments</a></span>
+	<span class="post-meta">{{ post.date | date: date_format }} | <a href="{{ post.url }}#disqus_thread"> comments</a></span>
 
         <span>{{ post.excerpt | markdownify | truncatewords: 25 }}</span>
 
