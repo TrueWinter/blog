@@ -183,8 +183,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 	}
       </script>
 	<script>
+		// CODE FROM: https://www.bounteous.com/insights/2017/09/27/scroll-tracking-recipe-gtm/?ns=l#google-analytics
   (function(document, window) {
-	  if (ntr) return;
+	  if (ntr) return console.log('Not scroll tracking');
+	  console.log('Scroll tracking');
 
     var config = {
       percentages: {
