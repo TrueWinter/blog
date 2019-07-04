@@ -214,6 +214,7 @@ display:block
 </style>
 </noscript>
 <script src="/js/ads.js"></script>
+<script id="dsq-count-scr" data-src="https://ndt3-blog.disqus.com/count.js" async></script>
 <script>
 window.addEventListener("load", function(){
 if (!document.getElementById('JyHSWMQrYFPg')) {
@@ -222,9 +223,10 @@ document.getElementsByClassName('ad')[i].innerHTML = "<span style=\"font-size:sm
 document.getElementsByClassName('ad')[i].style.margin = "20px";
 }
 }
+// This was taking too long to load, so moving it to after page load
+document.getElementById('dsq-count-scr').setAttribute('src', document.getElementById('dsq-count-scr').src);
 });
 </script>
-	  <script id="dsq-count-scr" src="https://ndt3-blog.disqus.com/count.js" async></script>
 	    <!-- Pride Month -->
   <script src="https://www.ndt3.me/custom/pride.js"></script>
   </body>
