@@ -224,7 +224,7 @@ document.getElementsByClassName('ad')[i].style.margin = "20px";
 }
 }
 // This was taking too long to load, so moving it to after page load
-document.getElementById('dsq-count-scr').setAttribute('src', document.getElementById('dsq-count-scr').src);
+document.getElementById('dsq-count-scr').setAttribute('src', document.getElementById('dsq-count-scr').getAttribute('data-src'));
 });
 </script>
 	    <!-- Pride Month -->
