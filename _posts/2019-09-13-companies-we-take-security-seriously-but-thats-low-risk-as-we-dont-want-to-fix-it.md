@@ -76,11 +76,11 @@ team. Oh, and my phone number and ID NUMBER?! Why the f\*\*\* do they
 need my ID number? After refusing to do this, I was again told to
 contact the fraud hotline. I was quite annoyed before but at this
 point I was getting frustrated that a bank doesn’t care about
-security and can’t understand that I need to report a security **vulnerability**. 
+security and can’t understand that I need to report a security **vulnerability**.
 
 ![C2_7](/images/uploads/C2_7.png)
 
-They then said that *they *provided
+They then said that \*they \*provided
 the security email first. I of course told them where I found this
 email address.
 
@@ -110,12 +110,12 @@ I actually got a reply.
 
 ![C3_2](/images/uploads/C3_2.png)
 
-Wait what? They are aware of the issue. But then say “*based
+Wait what? They are aware of the issue. But then say “\*based
 on the conditions that need to be in place for this to be
 successfully exploited,
 and the low likelihood of a meaningful real-world attack occurring
 within those conditions we”
-*consider
+\*consider
 it low risk. Someone
 didn’t read my email… I have successfully exploited the issue and
 created a demonstration of a real-world attack so I would consider it
@@ -157,7 +157,7 @@ worked.
 Then
 on 25 July 2019, I sent them another email after finding another
 security vulnerability that could increase the severity to high. I
-wanted them to reply first before I sent the details. 
+wanted them to reply first before I sent the details.
 
 ![C3_8](/images/uploads/C3_8.png)
 
@@ -199,11 +199,11 @@ On
 29 August 2019, more than a month later, I gave them the full PoC
 steps as
 I wasn’t going to wait any longer. It was obvious that they didn’t
-care.
+care. And yes, the PoC is still up. 
 
 ![C3_9](/images/uploads/C3_9.png)
 
 ![C3_10](/images/uploads/C3_10.png)
 
 So, in summary,
-some companies that really should care about security don’t. Maybe for some companies, money is more important than fixing a security vulnerability reported by a security researcher that is not well known. 
+some companies that really should care about security don’t. Maybe for some companies, money is more important than fixing a security vulnerability reported by a security researcher that is not well known.
