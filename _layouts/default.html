@@ -225,6 +225,41 @@ document.getElementById('dsq-count-scr').setAttribute('src', document.getElement
 	element.src = "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js";
 	document.body.appendChild(element);
 	(adsbygoogle = window.adsbygoogle || []).push({});
+		if (!(document.getElementsByTagName('article'))) return;
+	var a = document.getElementsByTagName('article')[0].children[2].children;
+var r = [];
+var q = [];
+var every = '1000';
+for (var i=0;i<a.length;i++){
+	if (a[i].nodeName==='P') {
+		console.log(a[i]);
+		r.push(a[i]);
+	}
+}
+console.log(r);
+var cu = 0;
+var cc = 0;
+var ca = [];
+for (var c=0;c<r.length;c++){
+	console.log(r[c].clientHeight);
+	if (r[c].clientHeight<every) {
+		//console.log('C');
+		//r[c].addAfter = false;
+		//for (var l=0;l<r.length
+		cc += r[c].clientHeight;
+		if (cc > 1000) {
+			ca.push(r[c]);
+			cc = 0;
+		}
+	}
+}
+
+console.log(ca);
+
+for (var s=0;s<ca.length;s++){
+	ca[s].innerHTML+='<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-3285187781774116" data-ad-slot="5173263456" data-ad-format="auto" data-full-width-responsive="true"></ins>';
+}
+	  
 	
 }
 	window.onload = loadAdScript;
