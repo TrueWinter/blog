@@ -135,7 +135,8 @@ disqusLoader( '.disqus', dsq_options );
         <script id="dsq-count-scr" data-src="//ndt3-blog.disqus.com/count.js" async></script>                    
 	<script>
 		window.addEventListener('load', function() {
-			$('#dsq-count-scr').attr('src', $('#dsq-count-scr').attr('data-src'));
+			//$('#dsq-count-scr').attr('src', $('#dsq-count-scr').attr('data-src'));
+			document.getElementById('dsq-count-scr').setAttribute('src',document.getElementById('dsq-count-scr').getAttribute('data-src'));
 		});
 	  </script>
   </div>
