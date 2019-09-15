@@ -95,6 +95,41 @@ document.getElementById('rTime').innerText = rTm;*/
 			  }
 		  </style>
 	  </noscript>
+<script>
+	var a = $('article').children[2].children;
+var r = [];
+var q = [];
+var every = '1000';
+for (var i=0;i<a.length;i++){
+	if (a[i].nodeName==='P') {
+		console.log(a[i]);
+		r.push(a[i]);
+	}
+}
+console.log(r);
+var cu = 0;
+var cc = 0;
+var ca = [];
+for (var c=0;c<r.length;c++){
+	console.log(r[c].clientHeight);
+	if (r[c].clientHeight<every) {
+		//console.log('C');
+		//r[c].addAfter = false;
+		//for (var l=0;l<r.length
+		cc += r[c].clientHeight;
+		if (cc > 1000) {
+			ca.push(r[c]);
+			cc = 0;
+		}
+	}
+}
+
+console.log(ca);
+
+for (var s=0;s<ca.length;s++){
+	ca[s].innerHTML+='<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-3285187781774116" data-ad-slot="5173263456" data-ad-format="auto" data-full-width-responsive="true"></ins>';
+}
+	  </script>
 	<a href="/">Back to the blog's home page</a><br>
 <div class="ad" style="text-align: center;font-size: small;">Advertisement<center><iframe data-aa="887950" src="" data-src="//ad.a-ads.com/887950?size=300x250" scrolling="no" style="width:300px; height:250px; border:0px; padding:0;overflow:hidden" allowtransparency="true"></iframe></center></div>
 <noscript>
