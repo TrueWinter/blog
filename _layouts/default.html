@@ -242,7 +242,8 @@ for (var c=0;c<r.length;c++){
 console.log(ca);
 
 for (var s=0;s<ca.length;s++){
-	ca[s].innerHTML+='<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-3285187781774116" data-ad-slot="5173263456" data-ad-format="auto" data-full-width-responsive="true"></ins>';
+	//$0.parentNode.insertAdjacentHTML('afterEnd', 'Test');
+	ca[s].parentNode.insertAdjacentHTML('afterEnd', '<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-3285187781774116" data-ad-slot="5173263456" data-ad-format="auto" data-full-width-responsive="true"></ins>');
 }
 	  
 	
