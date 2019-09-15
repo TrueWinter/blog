@@ -178,21 +178,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 	  <script src="https://wd-static1.ndt3.me/js/gascrolltracking.js"></script>
 	  <script>NdT3_GA_ST_init('{{ site.google_analytics }}', true)</script>
     {% endif %}
-<script>
-function NdT3LazyLoad() {
-	var iframeDefer = document.getElementsByTagName('iframe');
-	function defer(obj) {
-		for (var i=0; i<obj.length; i++) {
-			if(obj[i].getAttribute('data-src')) {
-				obj[i].setAttribute('src',obj[i].getAttribute('data-src'));
-			}
-		}
-	}
-	defer(iframeDefer);
-	document.getElementById('hr-ad1').setAttribute('src',document.getElementById('hr-ad1').getAttribute('data-src'));
-}
-window.onload = NdT3LazyLoad;
-</script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-lazyload/8.7.1/lazyload.min.js"></script>
 <script>
 var myLazyLoad = new LazyLoad();
@@ -262,8 +247,31 @@ for (var s=0;s<ca.length;s++){
 	  
 	
 }
-	window.onload = loadAdScript;
+	
+
+function NdT3LazyLoad() {
+	var iframeDefer = document.getElementsByTagName('iframe');
+	function defer(obj) {
+		for (var i=0; i<obj.length; i++) {
+			if(obj[i].getAttribute('data-src')) {
+				obj[i].setAttribute('src',obj[i].getAttribute('data-src'));
+			}
+		}
+	}
+	defer(iframeDefer);
+	document.getElementById('hr-ad1').setAttribute('src',document.getElementById('hr-ad1').getAttribute('data-src'));
+}
+	  
+	
+	function initScripts() {
+		NdT3LazyLoad();
+		loadAdScript();
+	}
+	
+	window.onload = initScripts;
+	
 </script>
+	  
 	    <!-- Pride Month -->
   <script src="https://www.ndt3.me/custom/pride.js"></script>
   </body>
