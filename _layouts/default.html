@@ -248,7 +248,7 @@ for (var s=0;s<ca.length;s++){
 //<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-3285187781774116" data-ad-slot="5173263456" data-ad-format="auto" data-full-width-responsive="true"></ins>
 	ca[s].insertAdjacentHTML ("beforebegin", '<div class="ndt3-google-ad"><span style="font-size:small;">Advertisement</span><br/><ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-3285187781774116" data-ad-slot="5173263456" data-ad-format="auto" data-full-width-responsive="true"></ins></div>');
 }
-	if (!adsbygoogle) {
+	if (typeof(window.adsbygoogle)=='undefined') {
 		loadGAds();
 	}
 for (var p=0;p<ca.length;p++) {
