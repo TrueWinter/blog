@@ -207,7 +207,7 @@ document.getElementById('dsq-count-scr').setAttribute('src', document.getElement
 });
 	function loadAdScript() {
 		// I know this ad loading script code is really bad but all other methods failed
-		if (!(document.getElementsByTagName('article'))) return;
+		if (document.getElementsByTagName('article').length==0) return;
 	var a = document.getElementsByTagName('article')[0].children[2].children;
 var r = [];
 var q = [];
