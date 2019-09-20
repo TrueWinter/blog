@@ -206,15 +206,12 @@ document.getElementsByClassName('ad')[i].style.margin = "20px";
 document.getElementById('dsq-count-scr').setAttribute('src', document.getElementById('dsq-count-scr').getAttribute('data-src'));
 });
 	function loadAdScript() {
-	var element = document.createElement("script");
-	element.src = "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js";
-	document.body.appendChild(element);
-	(adsbygoogle = window.adsbygoogle || []).push({});
+		// I know this ad loading script code is really bad but all other methods failed
 		if (!(document.getElementsByTagName('article'))) return;
 	var a = document.getElementsByTagName('article')[0].children[2].children;
 var r = [];
 var q = [];
-var every = '1000';
+var every = '300';
 for (var i=0;i<a.length;i++){
 	if (a[i].nodeName==='P') {
 		console.log(a[i]);
@@ -232,20 +229,31 @@ for (var c=0;c<r.length;c++){
 		//r[c].addAfter = false;
 		//for (var l=0;l<r.length
 		cc += r[c].clientHeight;
-		if (cc > 1000) {
-			ca.push(r[c]);
-			cc = 0;
+		if (cc > every) {
+			if (r[c].children.length > 0) {
+				if (r[c].children[0].nodeName=='IMG') {
+					continue;
+				}
+			} else {
+				console.log(r[c].children);
+				ca.push(r[c]);
+				cc = 0;
+			}
 		}
 	}
 }
-
 console.log(ca);
-
 for (var s=0;s<ca.length;s++){
 	//$0.parentNode.insertAdjacentHTML('afterEnd', 'Test');
-	ca[s].outerHTML+='<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-3285187781774116" data-ad-slot="5173263456" data-ad-format="auto" data-full-width-responsive="true"></ins>';
+//<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-3285187781774116" data-ad-slot="5173263456" data-ad-format="auto" data-full-width-responsive="true"></ins>
+	ca[s].insertAdjacentHTML ("beforebegin", '<div class="ndt3-google-ad"><span style="font-size:small;">Advertisement</span><br/><ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-3285187781774116" data-ad-slot="5173263456" data-ad-format="auto" data-full-width-responsive="true"></ins></div>');
 }
-	  
+	var element = document.createElement("script");
+	element.src = "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js";
+	//document.body.appendChild(element);
+for (var p=0;p<ca.length;p++) {
+	(adsbygoogle = window.adsbygoogle || []).push({});
+}
 	
 }
 	
