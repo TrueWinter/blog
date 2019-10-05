@@ -7,9 +7,6 @@ companies just don’t care about security. I wrote about three of
 these in my [last post](https://blog.ndt3.me/2019/09/13/companies-we-take-security-seriously-but-thats-low-risk-as-we-dont-want-to-fix-it). But in this post, I will be talking more about
 one of the companies I wrote about in that post.
 
-*Note
-that screenshots in this post were taken 2-3 hours before publishing.*
-
 If you
 have been following me on Twitter, you may have seen Tweets like
 these:
@@ -55,7 +52,7 @@ or have my server IP address.
 
 At this
 time, I thought it was just a normal subdomain takeover, a medium
-severity vulnerability. So I reported it. 
+severity vulnerability. So I reported it.
 
 Note
 that in the PoC URLs below, a non-standard port is used as there are
@@ -177,7 +174,6 @@ actually.
 
 * Injecting
   	an image or frame into a comment system on a blog vulnerable to XSS.
-
 * Phishing
   	campaign
 
