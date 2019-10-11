@@ -19,5 +19,5 @@ This is just one part of it, the other websites will also be merged into this on
 
 (Yes, there is photography listed as a site there. I may create a website to host some of the photos I have taken)
 
-I have many plans for my websites and services. But all of these require money and at the moment, I cannot even afford the cheapest DigitalOcean droplet without making a loss. At this time, I am relying on free services provided by kind people I meet online (mostly on Discord). If you would like to donate (or sponsor my projects) please contact me using the contact form at [https://www.ndt3.me/#contact](https://www.ndt3.me/#contact). I unfortunately cannot accept Patreon or PayPal donations as I am not yet 18 (almost there though).
+I have many plans for my websites and services. But all of these require money and at the moment, I cannot even afford the cheapest DigitalOcean droplet without making a loss. At this time, I am relying on free services provided by kind people I meet online (mostly on Discord). If you would like to donate (or sponsor my projects) please contact me using the contact form at [https://www.ndt3.me/#contact](https://www.ndt3.me/#contact).
 
