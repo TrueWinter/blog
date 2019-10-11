@@ -41,12 +41,11 @@ Before I end off this article, I just want to say that I have social media accou
 
 **Support Server on [Discord](https://discordapp.com)** *(Multiple links given, all go to the invite link)*:
 
-[https://ndt3.ml/r/discord](https://ndt3.ml/r/discord) or
-[https://l.ndt3.ml/ndt3-discord](https://l.ndt3.ml/ndt3-discord) or
+[https://ndt3.me/r/discord](https://ndt3.me/r/discord) or
+[https://l.ndt3.me/ndt3-discord](https://l.ndt3.me/ndt3-discord) or
 [https://discord.gg/scHhZcK](https://discord.gg/scHhZcK)
 
-~~I also accept donations on Patreon: [My Patreon Page](https://patreon.com/NdT3)~~ Due to a reason that I do not want to discuss here, I cannot accept donations on Patreon.
-
+I also accept donations on Patreon: [My Patreon Page](https://patreon.com/NdT3)
 
 
 
