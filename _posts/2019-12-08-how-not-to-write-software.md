@@ -24,13 +24,13 @@ the terms that I use may not be correct.
 So what does the program do when the login
 button is clicked?
 
-\`\`\`cs
+```cs
 
 Remote███DataContext remote███DataContext =
 new Remote███DataContext();
 
 if
-\(!remote███DataContext.Connection.ConnectionString.Contains("Password"))
+(!remote███DataContext.Connection.ConnectionString.Contains("Password"))
 
 {
 
@@ -39,45 +39,45 @@ remote███DataContext.Connection.ConnectionString
 
 }
 
-\`\`\`
+```
 
 Let’s get some more information about
-\`Remote███DataContext()\`
+`Remote███DataContext()`
 
-\`\`\`cs
+```cs
 
 public Remote███DataContext()
 
-\:
+:
 base(Settings.Default.███ConnectionString, mappingSource)
 
 {
 
 }
 
-\`\`\`
+```
 
 What is the connection string? Well, here it is:
 
-\`\`\`
+```
 
 "Data Source=███.co.za,1433;Initial
 Catalog=███;User ID=███"
 
-\`\`\`
+```
 
 So the program is connecting directly to the
 database, not using a web API. But that connection string doesn’t have a
 password, how can it connect to a database. At this point, I thought there would
 be some code to add the logged in user’s password and use that to connect to
-the database. But let’s go back to the first code sample. \`
-frmMain.sConnectionStr\` could give some information into how it works.
+the database. But let’s go back to the first code sample. `
+frmMain.sConnectionStr` could give some information into how it works.
 
-\`\`\`cs
+```cs
 
 public static string sConnectionStr = "";
 
-\`\`\`
+```
 
 Blank… Luckily ILSpy makes it easy to check
 what else reads or modifies a string.
@@ -86,10 +86,10 @@ It is modified by two functions (apologies
 if this is not the correct term, as previously mentioned, I have not developed
 with .NET before).
 
-One of them is \`███.frmMain.frmMain()\`. Not
+One of them is `███.frmMain.frmMain()`. Not
 much going on here
 
-\`\`\`cs
+```cs
 
 …
 
@@ -101,19 +101,19 @@ public static string sConnectionStr =
 public static string passphrase =
 "███";
 
-\`\`\`
+```
 
 Just setting the connection string to a
 blank string. You would’ve also noticed that I included a passphrase. I’ll come
 back to that later. So what else is modifying the connection string?
-\`███.frmMain.tmrStart_Tick\` is doing something…
+`███.frmMain.tmrStart_Tick` is doing something…
 
-\`\`\`cs
+```cs
 
 sConnectionStr =
-Settings.Default.███ConnectionString \+ ";Password=███";
+Settings.Default.███ConnectionString + ";Password=███";
 
-\`\`\`
+```
 
 <video autoplay loop><source class="lazy" data-src="https://cdn.ndt3.top/i/facepalm.mp4"
 type="video/mp4"></video>
@@ -133,7 +133,7 @@ calls them in order to obtain the registration key. But why do that when you
 could just create your own key using the code in the program used to verify the
 key.
 
-\`\`\`cs
+```cs
 
 sEncrSeed = ███.███Name.Trim();
 
@@ -141,12 +141,11 @@ int
 num2 = 0;
 
 for
-\(int i = 0; i < sEncrSeed.Length; i\+\+)
+(int i = 0; i < sEncrSeed.Length; i++)
 
 {
 
-num2
-\+= (i \+ 7) \* 432 \* Convert.ToInt16(sEncrSeed\[i\]) / 11;
+num2 += (i + 7) * 432 * Convert.ToInt16(sEncrSeed[i]) / 11;
 
 }
 
@@ -169,7 +168,7 @@ int
 num3 = random3.Next(100876, 923453);
 
 if
-\(███.SoftwareRegKey.Trim() != num3.ToString())
+(███.SoftwareRegKey.Trim() != num3.ToString())
 
 {
 
@@ -179,7 +178,7 @@ frmRegister = new frmRegister();
 frmRegister.ShowDialog();
 
 if
-\(███.SoftwareRegKey.Trim() != num3.ToString())
+(███.SoftwareRegKey.Trim() != num3.ToString())
 
 {
 
@@ -194,16 +193,16 @@ Close();
 
 }
 
-\`\`\`
+```
 
-Yes, the \`sEncrSeed\` is just the name of the
-company using the software. Let’s use \`NdT3\` as an example. The registration
-key would then be \`320524\`. And looking at the code, there does not appear to
+Yes, the `sEncrSeed` is just the name of the
+company using the software. Let’s use `NdT3` as an example. The registration
+key would then be `320524`. And looking at the code, there does not appear to
 be any server-side validation to this.
 
 Earlier, I included a passphrase in a code
-sample (\`public static string passphrase = "███";\` which was found in
-\`███.frmMain.frmMain()\`. What is this passphrase used for?
+sample (`public static string passphrase = "███";` which was found in
+`███.frmMain.frmMain()`. What is this passphrase used for?
 
 ![2019-12-01_13-22](/images/uploads/2019-12-01_13-22.png)
 
@@ -226,41 +225,33 @@ You are probably now wondering how that
 password reset is done? A script on the server decrypting the password then
 emailing it? No.
 
-\`\`\`cs
+```cs
 
 Remote███DataContext remote███DataContext =
 new Remote███DataContext();
 
 if
-\(!remote███DataContext.Connection.ConnectionString.Contains("Password"))
+(!remote███DataContext.Connection.ConnectionString.Contains("Password"))
 
 {
 
-remote███DataContext.Connection.ConnectionString
-= frmMain.sConnectionStr;
+remote███DataContext.Connection.ConnectionString = frmMain.sConnectionStr;
 
 }
 
 IQueryable<RDBUser>
 source = from u in remote███DataContext.RDBUsers
-
-where
-u.LoginName.Trim().ToUpper() == tbxUser.Text.Trim().ToUpper() &&
-\(long)u.███ID == frmMain.███ID
-
-select
-u;
+where u.LoginName.Trim().ToUpper() == tbxUser.Text.Trim().ToUpper() && (long)u.███ID == frmMain.███ID select u;
 
 if
-\(source.Count() == 1)
+(source.Count() == 1)
 
 {
 
-RDBUser
-rDBUser = source.Single();
+RDBUser rDBUser = source.Single();
 
 if
-\(rDBUser.Email.Trim().Length < 5 || !rDBUser.Email.Contains('@'))
+(rDBUser.Email.Trim().Length < 5 || !rDBUser.Email.Contains('@'))
 
 {
 
@@ -282,57 +273,48 @@ rDBUser.Password);
 
 }
 
-\`\`\`
+```
 
 So it gets the password from the database.
 The code can be easily modified to get another user’s password and send that
-password to an attacker’s email address. Then \`MailNow()\` does something with
+password to an attacker’s email address. Then `MailNow()` does something with
 it…
 
-\`\`\`cs
+```cs
 
 MailMessage mailMessage = new MailMessage();
 
 mailMessage.To.Add(sEmail);
 
-mailMessage.Subject
-= "███ Password for user: " \+ tbxUser.Text.Trim();
+mailMessage.Subject = "███ Password for user: " + tbxUser.Text.Trim();
 
-mailMessage.From
-= new MailAddress(frmMain.sStatementEmailAddr);
+mailMessage.From = new MailAddress(frmMain.sStatementEmailAddr);
 
-mailMessage.Body
-= "Your password is: " \+ frmMain.DecryptString(sPassw);
+mailMessage.Body = "Your password is: " + frmMain.DecryptString(sPassw);
 
-string
-host = "mail.███.co.za";
+string host = "mail.███.co.za";
 
 if
-\(frmMain.sSmtpServer.Trim().Length > 5)
+(frmMain.sSmtpServer.Trim().Length > 5)
 
 {
 
-host
-= frmMain.sSmtpServer;
+host = frmMain.sSmtpServer;
 
 }
 
-SmtpClient
-smtpClient = new SmtpClient(host);
+SmtpClient smtpClient = new SmtpClient(host);
 
-smtpClient.DeliveryMethod
-= SmtpDeliveryMethod.Network;
+smtpClient.DeliveryMethod = SmtpDeliveryMethod.Network;
 
-smtpClient.UseDefaultCredentials
-= false;
+smtpClient.UseDefaultCredentials = false;
 
 if
-\(frmMain.sSmtpServer.Trim().Length > 5)
+(frmMain.sSmtpServer.Trim().Length > 5)
 
 {
 
-smtpClient.Credentials
-= new NetworkCredential(frmMain.sMailUser, frmMain.sMailPassword);
+smtpClient.Credentials = new NetworkCredential(frmMain.sMailUser, frmMain.sMailPassword);
 
 }
 
@@ -340,8 +322,7 @@ else
 
 {
 
-smtpClient.Credentials
-= new NetworkCredential("info@███.co.za", "███");
+smtpClient.Credentials = new NetworkCredential("info@███.co.za", "███");
 
 }
 
@@ -351,33 +332,30 @@ try
 
 smtpClient.Send(mailMessage);
 
-tbxEmail.Text
-= sEmail;
+tbxEmail.Text = sEmail;
 
-pnlResult.Visible
-= true;
+pnlResult.Visible = true;
 
 }
 
 catch
-\(Exception ex)
+(Exception ex)
 
 {
 
-MessageBox.Show("Email
-delivery failed:\\n\\r" \+ ex.Message);
+MessageBox.Show("Email delivery failed:\n\r" + ex.Message);
 
 }
 
-\`\`\`
+```
 
 <video autoplay loop><source class="lazy" data-src="https://cdn.ndt3.top/i/facepalm2.mp4"
 type="video/mp4"></video>
 
 Yes, the program, intended to be installed
-on computers, takes the password it receives (\`sPassw\`), connects to the
+on computers, takes the password it receives (`sPassw`), connects to the
 developer’s email server (with the password hard-coded in) and emails the
-password to the given email address (\`sEmail\`).
+password to the given email address (`sEmail`).
 
 So please, if you develop software, do not
 do any of the things showed in the above code samples. Instead, create a web
@@ -385,3 +363,4 @@ API (and only allow HTTPS connections to this API), use API keys and hash
 passwords and store these hashes in the database instead of plain text
 passwords. The program should only have access to data that it really needs so
 ensure that requests cannot be modified to access other data in the database.
+
