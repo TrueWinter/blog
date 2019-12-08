@@ -229,7 +229,8 @@ remote███DataContext.Connection.ConnectionString = frmMain.sConnectionStr;
 
 IQueryable<RDBUser>
 source = from u in remote███DataContext.RDBUsers
-where u.LoginName.Trim().ToUpper() == tbxUser.Text.Trim().ToUpper() && (long)u.███ID == frmMain.███ID select u;
+where u.LoginName.Trim().ToUpper() == tbxUser.Text.Trim().ToUpper() && (long)u.███ID == frmMain.███ID 
+select u;
 
 if
 (source.Count() == 1)
@@ -243,8 +244,7 @@ if
 
 {
 
-MessageBox.Show("Invalid
-or Missing Email address!");
+MessageBox.Show("Invalid or Missing Email address!");
 
 Close();
 
@@ -254,8 +254,7 @@ else
 
 {
 
-MailNow(rDBUser.Email.Trim(),
-rDBUser.Password);
+MailNow(rDBUser.Email.Trim(), rDBUser.Password);
 
 }
 
@@ -350,6 +349,7 @@ API (and only allow HTTPS connections to this API), use API keys and hash
 passwords and store these hashes in the database instead of plain text
 passwords. The program should only have access to data that it really needs so
 ensure that requests cannot be modified to access other data in the database.
+
 
 
 
