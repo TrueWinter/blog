@@ -106,8 +106,7 @@ sConnectionStr = Settings.Default.███ConnectionString + ";Password=██�
 
 ```
 
-<video autoplay loop class="lazy"><source data-src="https://cdn.ndt3.top/i/facepalm.mp4"
-type="video/mp4" /></video>
+<video class="lazy" autoplay loop data-src="https://cdn.ndt3.top/i/facepalm.mp4"></video>
 
 There’s the password. And looking at the 75
 other functions in the program that read the connection string, I would assume
@@ -338,8 +337,7 @@ MessageBox.Show("Email delivery failed:\n\r" + ex.Message);
 
 ```
 
-<video autoplay loop class="lazy"><source class="lazy" data-src="https://cdn.ndt3.top/i/facepalm2.mp4"
-type="video/mp4" /></video>
+<video class="lazy" autoplay loop data-src="https://cdn.ndt3.top/i/facepalm2.mp4"></video>
 
 Yes, the program, intended to be installed
 on computers, takes the password it receives (`sPassw`), connects to the
@@ -352,6 +350,7 @@ API (and only allow HTTPS connections to this API), use API keys and hash
 passwords and store these hashes in the database instead of plain text
 passwords. The program should only have access to data that it really needs so
 ensure that requests cannot be modified to access other data in the database.
+
 
 
 
