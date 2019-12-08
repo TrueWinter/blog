@@ -57,8 +57,7 @@ What is the connection string? Well, here it is:
 
 ```
 
-"Data Source=███.co.za,1433;Initial
-Catalog=███;User ID=███"
+"Data Source=███.co.za,1433;InitialCatalog=███;User ID=███"
 
 ```
 
@@ -107,7 +106,7 @@ sConnectionStr = Settings.Default.███ConnectionString + ";Password=██�
 
 ```
 
-<video autoplay loop data-src="https://cdn.ndt3.top/i/facepalm.mp4"><source class="lazy" data-src="https://cdn.ndt3.top/i/facepalm.mp4"
+<video autoplay loop class="lazy" data-src="https://cdn.ndt3.top/i/facepalm.mp4"><source data-src="https://cdn.ndt3.top/i/facepalm.mp4"
 type="video/mp4"></video>
 
 There’s the password. And looking at the 75
@@ -339,7 +338,7 @@ MessageBox.Show("Email delivery failed:\n\r" + ex.Message);
 
 ```
 
-<video autoplay loop data-src="https://cdn.ndt3.top/i/facepalm2.mp4"><source class="lazy" data-src="https://cdn.ndt3.top/i/facepalm2.mp4"
+<video autoplay loop class="lazy" data-src="https://cdn.ndt3.top/i/facepalm2.mp4"><source class="lazy" data-src="https://cdn.ndt3.top/i/facepalm2.mp4"
 type="video/mp4"></video>
 
 Yes, the program, intended to be installed
@@ -353,6 +352,7 @@ API (and only allow HTTPS connections to this API), use API keys and hash
 passwords and store these hashes in the database instead of plain text
 passwords. The program should only have access to data that it really needs so
 ensure that requests cannot be modified to access other data in the database.
+
 
 
 
