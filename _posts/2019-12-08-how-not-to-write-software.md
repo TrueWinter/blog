@@ -26,16 +26,14 @@ button is clicked?
 
 ```cs
 
-Remote███DataContext remote███DataContext =
-new Remote███DataContext();
+Remote███DataContext remote███DataContext = new Remote███DataContext();
 
 if
 (!remote███DataContext.Connection.ConnectionString.Contains("Password"))
 
 {
 
-remote███DataContext.Connection.ConnectionString
-= frmMain.sConnectionStr;
+remote███DataContext.Connection.ConnectionString = frmMain.sConnectionStr;
 
 }
 
@@ -47,9 +45,7 @@ Let’s get some more information about
 ```cs
 
 public Remote███DataContext()
-
-:
-base(Settings.Default.███ConnectionString, mappingSource)
+:base(Settings.Default.███ConnectionString, mappingSource)
 
 {
 
@@ -70,8 +66,7 @@ So the program is connecting directly to the
 database, not using a web API. But that connection string doesn’t have a
 password, how can it connect to a database. At this point, I thought there would
 be some code to add the logged in user’s password and use that to connect to
-the database. But let’s go back to the first code sample. `
-frmMain.sConnectionStr` could give some information into how it works.
+the database. But let’s go back to the first code sample. `frmMain.sConnectionStr` could give some information into how it works.
 
 ```cs
 
@@ -93,13 +88,11 @@ much going on here
 
 …
 
-public static string sConnectionStr =
-"";
+public static string sConnectionStr = "";
 
 …
 
-public static string passphrase =
-"███";
+public static string passphrase = "███";
 
 ```
 
@@ -110,8 +103,7 @@ back to that later. So what else is modifying the connection string?
 
 ```cs
 
-sConnectionStr =
-Settings.Default.███ConnectionString + ";Password=███";
+sConnectionStr = Settings.Default.███ConnectionString + ";Password=███";
 
 ```
 
@@ -182,8 +174,7 @@ if
 
 {
 
-MessageBox.Show("Incorrect
-Registration Key! Program will now Terminate...");
+MessageBox.Show("Incorrect Registration Key! Program will now Terminate...");
 
 Application.Exit();
 
@@ -227,8 +218,7 @@ emailing it? No.
 
 ```cs
 
-Remote███DataContext remote███DataContext =
-new Remote███DataContext();
+Remote███DataContext remote███DataContext = new Remote███DataContext();
 
 if
 (!remote███DataContext.Connection.ConnectionString.Contains("Password"))
@@ -363,4 +353,5 @@ API (and only allow HTTPS connections to this API), use API keys and hash
 passwords and store these hashes in the database instead of plain text
 passwords. The program should only have access to data that it really needs so
 ensure that requests cannot be modified to access other data in the database.
+
 
