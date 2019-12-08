@@ -205,7 +205,7 @@ So the passphrase is being used to encrypt
 something that is used in a login form, password change form, and user creation
 form. That’s right, passwords are being encrypted. This means that if an
 attacker does get into the database, they have to decrypt the passwords first.
-Should be hard enough right? Wrong. A download of the software is available to
+Should be hard enough right? Wrong. A copy of the software is available to
 download from the same server as the database is on. So if an attacker does get
 the database, they probably also have the program and can easily extract the
 encryption key.
@@ -350,6 +350,7 @@ API (and only allow HTTPS connections to this API), use API keys and hash
 passwords and store these hashes in the database instead of plain text
 passwords. The program should only have access to data that it really needs so
 ensure that requests cannot be modified to access other data in the database.
+
 
 
 
