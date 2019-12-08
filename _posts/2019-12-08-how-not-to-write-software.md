@@ -63,7 +63,7 @@ What is the connection string? Well, here it is:
 
 So the program is connecting directly to the
 database, not using a web API. But that connection string doesn’t have a
-password, how can it connect to a database. At this point, I thought there would
+password, how can it connect to a database? At this point, I thought there would
 be some code to add the logged in user’s password and use that to connect to
 the database. But let’s go back to the first code sample. `frmMain.sConnectionStr` could give some information into how it works.
 
@@ -350,6 +350,7 @@ API (and only allow HTTPS connections to this API), use API keys and hash
 passwords and store these hashes in the database instead of plain text
 passwords. The program should only have access to data that it really needs so
 ensure that requests cannot be modified to access other data in the database.
+
 
 
 
