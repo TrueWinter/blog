@@ -45,7 +45,7 @@ to find a security email on their website, I decided to use their
 live chat to get contact details for their security team. These were
 the options available:
 
-![Web Chat Options](/images/uploads/WebChatOptions.png)
+![Web Chat Options](/images/uploads/VodafoneUK1_WebChatOptions.png)
 
 Nothing for security
 or even a general contact option… So I just chose a random one (I
@@ -53,20 +53,20 @@ believe I chose Technical – Broadband). I was first given a phone
 number but after explaining that I live in South Africa and therefore
 I won’t be able to call, I was given an email address.
 
-![Web Chat 1 Picture 1](/images/uploads/WebChat1-1.png)
+![Web Chat 1 Picture 1](/images/uploads/VodafoneUK1_WebChat1-1.png)
 
-![Web Chat 1 Picture 2](/images/uploads/WebChat1-2.png)
+![Web Chat 1 Picture 2](/images/uploads/VodafoneUK1_WebChat1-2.png)
 
-![Web Chat 1 Picture 3](/images/uploads/WebChat1-3.png)
+![Web Chat 1 Picture 3](/images/uploads/VodafoneUK1_WebChat1-3.png)
 
-![Web Chat 1 Picture 4](/images/uploads/WebChat1-4.png)
+![Web Chat 1 Picture 4](/images/uploads/VodafoneUK1_WebChat1-4.png)
 
 So after setting up
 a proof of concept on an Azure trial account, I sent them an email.
 
-![Azure Custom Domain](/images/uploads/AzureCustomDomain.png)
+![Azure Custom Domain](/images/uploads/VodafoneUK1_AzureCustomDomain.png)
 
-![Email 1](/images/uploads/Email1.png)
+![Email 1](/images/uploads/VodafoneUK1_Email1.png)
 
 As you can see from
 the email, I did actually get an SSL certificate for the subdomain.
@@ -80,37 +80,37 @@ I obtained the
 certificate from Let’s Encrypt (I verified the subdomain using the
 HTTP method).
 
-![SSL](/images/uploads/SSL.png)
+![SSL](/images/uploads/VodafoneUK1_SSL.png)
 
 The PoC was set up
 on a URL that people would not know about and not on the index page.
 
-![URL](/images/uploads/URL.png)
+![URL](/images/uploads/VodafoneUK1_URL.png)
 
 For the PoC page, I
 went with my standard subdomain takeover notice.
 
-![Takeover PoC Page](/images/uploads/Takeover.png)
+![Takeover PoC Page](/images/uploads/VodafoneUK1_Takeover.png)
 
 After a few hours
 and not even an acknowledgement of receipt, I contacted Vodafone UK
 on Twitter.
 
-![Twitter 1](/images/uploads/Twitter1.png)
+![Twitter 1](/images/uploads/VodafoneUK1_Twitter1.png)
 
 My tweet was
 ignored. So I went back to the live chat, hoping to get a response
 there. And they were not able to help.
 
-![Web Chat 2 Picture 1](/images/uploads/WebChat2-1.png)
+![Web Chat 2 Picture 1](/images/uploads/VodafoneUK1_WebChat2-1.png)
 
-![Web Chat 2 Picture 2](/images/uploads/WebChat2-2.png)
+![Web Chat 2 Picture 2](/images/uploads/VodafoneUK1_WebChat2-2.png)
 
-![Web Chat 2 Picture 3](/images/uploads/WebChat2-3.png)
+![Web Chat 2 Picture 3](/images/uploads/VodafoneUK1_WebChat2-3.png)
 
-![Web Chat 2 Picture 4](/images/uploads/WebChat2-4.png)
+![Web Chat 2 Picture 4](/images/uploads/VodafoneUK1_WebChat2-4.png)
 
-![Web Chat 2 Picture 5](/images/uploads/WebChat2-5.png)
+![Web Chat 2 Picture 5](/images/uploads/VodafoneUK1_WebChat2-5.png)
 
 Back to Twitter. So
 I sent a DM. I was told that the social media team cannot check on
@@ -118,62 +118,62 @@ the status of the report. (At the time of writing, the social media
 teams of two of the companies I reported to were able to check the
 status of reports).
 
-![Twitter 2](/images/uploads/Twitter2.png)
+![Twitter 2](/images/uploads/VodafoneUK1_Twitter2.png)
 
-![Twitter 3](/images/uploads/Twitter3.png)
+![Twitter 3](/images/uploads/VodafoneUK1_Twitter3.png)
 
 Back to emails then.
 I sent a reminder email.
 
-![Email 2](/images/uploads/Email2.png)
+![Email 2](/images/uploads/VodafoneUK1_Email2.png)
 
 Two days later I got
 a response but not a helpful one.
 
-![Email 3](/images/uploads/Email3.png)
+![Email 3](/images/uploads/VodafoneUK1_Email3.png)
 
 Seven days later I
 sent another reminder email, this time mentioning my Azure trial.
 
-![Email 4](/images/uploads/Email4.png)
+![Email 4](/images/uploads/VodafoneUK1_Email4.png)
 
 And a few days
 later, another reminder.
 
-![Email 5](/images/uploads/Email5.png)
+![Email 5](/images/uploads/VodafoneUK1_Email5.png)
 
 A few days after
 this, I got a reply back with more details from someone who appears
 to be in a more senior position.
 
-![Email 6](/images/uploads/Email6.png)
+![Email 6](/images/uploads/VodafoneUK1_Email6.png)
 
 And I replied
 verifying the fix and asking for permission to disclose.
 
-![Email 7](/images/uploads/Email7.png)
+![Email 7](/images/uploads/VodafoneUK1_Email7.png)
 
 I was hoping to
 immediately get a yes for the request. But more emails had to be
 sent.
 
-![Email 8](/images/uploads/Email8.png)
+![Email 8](/images/uploads/VodafoneUK1_Email8.png)
 
 And so I did send an
 email.
 
-![Email 9](/images/uploads/Email9.png)
+![Email 9](/images/uploads/VodafoneUK1_Email9.png)
 
 And another reminder
 email.
 
-![Email 10](/images/uploads/Email10.png)
+![Email 10](/images/uploads/VodafoneUK1_Email10.png)
 
 And eight days
 later, I received an email granting me permission to disclose after
 the 7th of June.
 
-![Email 11](/images/uploads/Email11.png)
+![Email 11](/images/uploads/VodafoneUK1_Email11.png)
 
 I did want to do a
 timeline but I edited some photos to blur out names and personal
