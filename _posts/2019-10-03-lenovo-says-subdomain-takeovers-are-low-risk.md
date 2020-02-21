@@ -11,30 +11,30 @@ If you
 have been following me on Twitter, you may have seen Tweets like
 these:
 
-![Twitter1](/images/uploads/Twitter1.png)
+![Twitter1](/images/uploads/lenovo1_Twitter1.png)
 
-![Twitter2](/images/uploads/Twitter2.png)
+![Twitter2](/images/uploads/lenovo1_Twitter2.png)
 
-![Twitter3](/images/uploads/Twitter3.png)
+![Twitter3](/images/uploads/lenovo1_Twitter3.png)
 
-![Twitter4](/images/uploads/Twitter4.png)
+![Twitter4](/images/uploads/lenovo1_Twitter4.png)
 
-![Twitter5](/images/uploads/Twitter5.png)
+![Twitter5](/images/uploads/lenovo1_Twitter5.png)
 
-![Twitter6](/images/uploads/Twitter6.png)
+![Twitter6](/images/uploads/lenovo1_Twitter6.png)
 
-![Twitter7](/images/uploads/Twitter7.png)
+![Twitter7](/images/uploads/lenovo1_Twitter7.png)
 
 Or
 these:
 
-![Twitter8](/images/uploads/Twitter8.png)
+![Twitter8](/images/uploads/lenovo1_Twitter8.png)
 
-![Twitter9](/images/uploads/Twitter9.png)
+![Twitter9](/images/uploads/lenovo1_Twitter9.png)
 
-![Twitter10](/images/uploads/Twitter10.png)
+![Twitter10](/images/uploads/lenovo1_Twitter10.png)
 
-![Twitter11](/images/uploads/Twitter11.png)
+![Twitter11](/images/uploads/lenovo1_Twitter11.png)
 
 Yes, I
 am referring to Lenovo’s security.
@@ -48,7 +48,7 @@ that the domain is no longer pointed to my server as I am doing
 public disclosure and don’t really want anyone to access the PoCs
 or have my server IP address.
 
-![DNS](/images/uploads/dns1.png)
+![DNS](/images/uploads/lenovo1_dns1.png)
 
 At this
 time, I thought it was just a normal subdomain takeover, a medium
@@ -58,9 +58,9 @@ Note
 that in the PoC URLs below, a non-standard port is used as there are
 other PoCs and scripts running on the server.
 
-![Email1](/images/uploads/Email1.png)
+![Email1](/images/uploads/lenovo1_Email1.png)
 
-![Email2](/images/uploads/Email2.png)
+![Email2](/images/uploads/lenovo1_Email2.png)
 
 They
 are aware of the issue. But they feel that “based on the conditions
@@ -72,16 +72,16 @@ have a “real-world attack” set up, just not in a malicious way.
 And a subdomain takeover is not low risk. Other people in information
 security also see the risk.
 
-![Twitter12](/images/uploads/Twitter12.png)
+![Twitter12](/images/uploads/lenovo1_Twitter12.png)
 
-![Twitter13](/images/uploads/Twitter13.png)
+![Twitter13](/images/uploads/lenovo1_Twitter13.png)
 
 So I
 ask them to reconsider.
 
-![Email3](/images/uploads/Email3.png)
+![Email3](/images/uploads/lenovo1_Email3.png)
 
-![Email4](/images/uploads/Email4.png)
+![Email4](/images/uploads/lenovo1_Email4.png)
 
 And
 they email back for the last time saying that the PoC is not
@@ -92,30 +92,30 @@ they used the wrong URL to try to access the PoC (I think they tried
 instead of
 [http://smartoffice.csw.lenovo.com:15580/subdomain-takeover-by-ndt3](http://smartoffice.csw.lenovo.com:15580/subdomain-takeover-by-ndt3)).
 
-![Email5](/images/uploads/Email5.png)
+![Email5](/images/uploads/lenovo1_Email5.png)
 
 I sent
 them an email providing the PoC link again and later, another
 follow-up email.
 
-![Email6](/images/uploads/Email6.png)
+![Email6](/images/uploads/lenovo1_Email6.png)
 
-![Email7](/images/uploads/Email7.png)
+![Email7](/images/uploads/lenovo1_Email7.png)
 
 A few
 weeks later, I found another issue which would turn this
 vulnerability into a high severity one. As I was getting tired of not
 getting a response, I asked for a reply before releasing the details.
 
-![Email8](/images/uploads/Email8.png)
+![Email8](/images/uploads/lenovo1_Email8.png)
 
 This
 attempt at getting a reply failed so I had no choice but to provide
 the details and hope they read the email.
 
-![Email9](/images/uploads/Email9.png)
+![Email9](/images/uploads/lenovo1_Email9.png)
 
-![Email10](/images/uploads/Email10.png)
+![Email10](/images/uploads/lenovo1_Email10.png)
 
 Note
 that in the above emails, the PoC URLs are now using SSL and are
@@ -126,7 +126,7 @@ And
 after a month of waiting, I sent them an email stating my intention
 to publicly disclose this vulnerability due to their lack of replies.
 
-![Email11](/images/uploads/Email11.png)
+![Email11](/images/uploads/lenovo1_Email11.png)
 
 I also
 contacted them on Twitter (DMs), however these screenshots have been left
@@ -142,30 +142,30 @@ Reader.
 I
 logged into my Lenovo account.
 
-![PoC1](/images/uploads/PoC1.png)
+![PoC1](/images/uploads/lenovo1_PoC1.png)
 
-![PoC2](/images/uploads/PoC2.png)
+![PoC2](/images/uploads/lenovo1_PoC2.png)
 
 I got
 my cookies from the PoC.
 
-![PoC3](/images/uploads/PoC3.png)
+![PoC3](/images/uploads/lenovo1_PoC3.png)
 
 Now, I
 open an incognito browser window and go to the Lenovo login page.
 Notice that I am not logged in.
 
-![PoC4](/images/uploads/PoC4.png)
+![PoC4](/images/uploads/lenovo1_PoC4.png)
 
 I open
 the PoC page to set the cookies I copied from a previous step for the domain.
 
-![PoC5](/images/uploads/PoC5.png)
+![PoC5](/images/uploads/lenovo1_PoC5.png)
 
 And, in
 the same incognito browser window, I am now logged in.
 
-![PoC6](/images/uploads/PoC6.png)
+![PoC6](/images/uploads/lenovo1_PoC6.png)
 
 So
 how can this be used in a “meaningful
