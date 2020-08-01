@@ -1,0 +1,35 @@
+.post-list {
+	margin-left: 0;
+	list-style: none;
+}
+.post-list > li {
+	margin-bottom: 45px;
+}
+.post-list > li > h2 {
+	margin-top: 0rem;
+	margin-bottom: 0.4rem;
+}
+
+.highlight {
+	padding: .8rem;
+	border-radius: 4px;
+}
+
+article {
+	padding-bottom: 16px;
+}
+
+.form-control {
+    background-color: #222;
+    border: 1px solid gray;
+	color: #dfe8ee;
+}
+
+.form-control:focus {
+	background-color: inherit;
+	color: #dfe8ee;
+}
+
+.commentsTextarea {
+	height: 150px !important;
+}

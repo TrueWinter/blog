@@ -1,5 +1,5 @@
 $(function() {
-  var ref = new Firebase("https://ndt3blogcomments.firebaseio.com/"),
+  var ref = new Firebase("https://tw-comments.firebaseio.com/"),
     postRef = ref.child(slugify(window.location.pathname));
 
     postRef.on("child_added", function(snapshot) {
@@ -10,8 +10,8 @@ $(function() {
         '<td><span>' + escapeHtml(newPost.message)  + '</span></td></table></div>');
     });
 
-    $("#submitbtn").click(function() {
-	if ($("#message").val() && $("#email").val() && $("#name").val()) {
+    $("#addComments").submit(function() {
+	if ($("#commentsTextarea").val() && $("#email").val() && $("#name").val()) {
 		console.log("OK");
 
       var a = postRef.push();
@@ -19,12 +19,12 @@ $(function() {
       
       a.set({
         name: $("#name").val(),
-        message: $("#message").val(),
+        message: $("#commentsTextarea").val(),
         md5Email: md5($("#email").val()),
         postedAt: Firebase.ServerValue.TIMESTAMP
       });
 
-      $("input[type=text], textarea").val("");
+      $("#name, #email, #commentsTextarea").val("");
       return false;
 } else {
 document.getElementById("jsresponse").innerHTML = "All fields are required";

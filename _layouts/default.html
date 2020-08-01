@@ -7,7 +7,6 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <meta name="theme-color" content="#157878">
 
       {% if page.title %}
 	  {% assign page-title = page.title | append: " | NdT3Blog" %}
@@ -44,17 +43,23 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       <link rel="alternate" type="application/rss+xml" title="{{ site.title | escape }}" href="{{ "/feed.xml" | relative_url }}">
     {% endif %}
 
-    <link rel="shortcut icon" href="{{ site.url }}/n-icon-1.png">
-    <link rel="icon" href="/n-icon-1.png">
+    <link rel="shortcut icon" href="{{ site.url }}/assets/img/tw-temp-new-logo-sq-v2-64.jpg">
+    <link rel="icon" href="/assets/img/tw-temp-new-logo-sq-v2-64.jpg">
     <meta name="robots" content="noarchive">
 
     <!-- <link rel="alternate" media="only screen and (max-width: 640px)" href="">
     <link rel="alternate" media="handheld" href=""> -->
 
 
-    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" href="{{ '/assets/css/style.css?v=' | append: site.github.build_revision | relative_url }}">
-	  <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.3/cookieconsent.min.css" />
+	<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    <!--<link rel="stylesheet" href="{{ '/assets/css/style.css?v=' | append: site.github.build_revision | relative_url }}">-->
+    <link rel="stylesheet" href="/assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic&amp;display=swap">
+    <link rel="stylesheet" href="/assets/fonts/fontawesome-all.min.css">
+    <link rel="stylesheet" href="/assets/css/styles.min.css">
+	<link rel="stylesheet" href="/assets/css/blog.css">
+	<link rel="stylesheet" href="/assets/css/rouge.css">
+	<link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.3/cookieconsent.min.css" />
 <script src="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.3/cookieconsent.min.js"></script>
 <script>
 window.addEventListener("load", function(){
@@ -69,7 +74,7 @@ window.cookieconsent.initialise({
   },
   "theme": "classic",
   "content": {
-    "href": "https://www.ndt3.me/legal/privacy"
+    "href": "https://truewinter.dev/legal/privacy"
   }
 })});
 </script>
@@ -79,8 +84,6 @@ window.cookieconsent.initialise({
 <!--<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-M3MJP6H"
 height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>-->
 <!-- End Google Tag Manager (noscript) -->
-
-    {% include site-header.html %}
 
     {% if page.layout == 'home' %}
       {% assign page-tagline = site.description | default: site.github.project_tagline | escape %}
@@ -92,72 +95,83 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       {% assign page-tagline = page.tagline | escape  %}
     {% endif %}
 
-    <section class="page-header">
-	<span id="header-content">
-      <a href="/" style="text-decoration:none;color:white"><h1 class="project-name">{{ site.title }}</h1></a>
-      <h2 class="project-tagline">{{ page-tagline }}</h2>
-	    </span>
-    </section>
 
-    <section class="main-content">
-      <h1> {{ page.title }} </h2>
-	{% if page.layout == 'post' %}
-        <p class="project-date">
-        <strong datetime="{{ page.date | date_to_xmlschema }}" itemprop="datePublished">
-          {% assign date_format = site.cayman-blog.date_format | default: "%b %-d, %Y" %}
-          {{ page.date | date: date_format }}
-		</strong><span class="readingTime"> | <strong>Reading Time: <span id="rTime"></span></strong></span>
-			    
-        </p>
-<div class="ad" style="text-align: center;font-size: small;">Advertisement<center><iframe data-aa="887950" src="" data-src="//ad.a-ads.com/887950?size=300x250" scrolling="no" style="width:300px; height:250px; border:0px; padding:0;overflow:hidden" allowtransparency="true"></iframe></center></div>
-<!--<div class="ad" style="text-align: center;font-size: small;">Advertisement<center><div style="height: 250px;width: 300px;"><script id="hr-ad1" data-cfasync='false' type='text/javascript' data-src='//p364639.clksite.com/adServe/banners?tid=364639_714740_0'></script></div></center></div>-->
-<noscript>
-<div class="ad-ns" style="text-align: center;font-size: small;">Advertisement<center><iframe data-aa="887950" src="//ad.a-ads.com/887950?size=300x250" scrolling="no" style="width:300px; height:250px; border:0px; padding:0;overflow:hidden" allowtransparency="true"></iframe></center></div>
-</noscript>
-	    {% endif %}
+	<nav class="navbar navbar-dark navbar-expand-md sticky-top bg-dark navigation-clean">
+        <div class="container-fluid"><a class="navbar-brand" href="/" style="padding: 0px;margin: 0px;"><img src="/assets/img/tw-temp-new-logo-sq-v2-64.jpg" style="margin: 0px;height: 64px;"></a><button data-toggle="collapse" class="navbar-toggler" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
+            <div
+                class="collapse navbar-collapse" id="navcol-1">
+                <ul class="nav navbar-nav ml-auto">
+                    <li class="nav-item" role="presentation"><a class="nav-link" href="https://truewinter.dev/#about">About</a></li>
+                    <li class="nav-item" role="presentation"><a class="nav-link" href="https://truewinter.dev/#projects">Projects</a></li>
+                    <li class="nav-item" role="presentation"><a class="nav-link" href="https://truewinter.dev/#contact">Contact</a></li>
+                    <li class="nav-item" role="presentation"><a class="nav-link nav-sep active" href="https://blog.truewinter.dev">Blog</a></li>
+                </ul>
+        </div>
+        </div>
+    </nav>
+    <div data-bs-parallax-bg="true" style="height: 300px;background: url(/assets/img/20200730_190232_e.jpg) center / cover;">
+        <div class="d-flex d-xl-flex justify-content-center align-items-center justify-content-xl-center align-items-xl-center" style="height: 300px;">
+            <div>
+                <div class="d-block">
+                    <p style="color: #dfe8ee;font-size: 32px;text-align: center;">TrueWinter</p>
+                    <div class="social-icons"><a target="_blank" href="https://l.truewinter.dev/github"><i class="fab fa-github"></i></a><a target="_blank" href="https://l.truewinter.dev/twitter"><i class="fab fa-twitter"></i></a><a target="_blank" href="https://blog.truewinter.dev/"><i class="fas fa-blog"></i></a><a target="_blank" href="https://l.truewinter.dev/discord"><i class="fab fa-discord"></i></a></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container" style="margin-top: 16px;color: #dfe8ee;">
+		  <h1> {{ page.title }} </h1>
+		{% if page.layout == 'post' %}
+			<p class="project-date">
+			<strong datetime="{{ page.date | date_to_xmlschema }}" itemprop="datePublished">
+			  {% assign date_format = "%b %-d, %Y" %}
+			  {{ page.date | date: date_format }}
+			</strong><span class="readingTime"> | <strong>Reading Time: <span id="rTime"></span></strong></span>
+					
+			</p>
+		<!--<div class="ad" style="text-align: center;font-size: small;">Advertisement<center><iframe data-aa="887950" src="" data-src="//ad.a-ads.com/887950?size=300x250" scrolling="no" style="width:300px; height:250px; border:0px; padding:0;overflow:hidden" allowtransparency="true"></iframe></center></div>-->
+		<!--<div class="ad" style="text-align: center;font-size: small;">Advertisement<center><div style="height: 250px;width: 300px;"><script id="hr-ad1" data-cfasync='false' type='text/javascript' data-src='//p364639.clksite.com/adServe/banners?tid=364639_714740_0'></script></div></center></div>-->
+		<!--<noscript>
+		<div class="ad-ns" style="text-align: center;font-size: small;">Advertisement<center><iframe data-aa="887950" src="//ad.a-ads.com/887950?size=300x250" scrolling="no" style="width:300px; height:250px; border:0px; padding:0;overflow:hidden" allowtransparency="true"></iframe></center></div>
+		</noscript>-->
+			{% endif %}
 
-      {{ content }}
-
-      <footer class="site-footer">
-
-        <!-- SVG icons from https://iconmonstr.com -->
-
-        <!-- Github icon -->
-        <span class="my-span-icon">
-          <a href="https://github.com/{{ site.github_username }}" aria-label="{{ site.github_username }}'s GitHub" title="{{ site.github_username }}'s GitHub">
-            <svg class="my-svg-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
-          </a>
-        </span>
-
-        <!-- Twitter icon -->
-        <span class="my-span-icon">
-          <a href="https://twitter.com/{{ site.twitter_username }}" aria-label="{{ site.github_username }}'s Twitter" title="{{ site.github_username }}'s Twitter">
-            <svg class="my-svg-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M12 0c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm6.066 9.645c.183 4.04-2.83 8.544-8.164 8.544-1.622 0-3.131-.476-4.402-1.291 1.524.18 3.045-.244 4.252-1.189-1.256-.023-2.317-.854-2.684-1.995.451.086.895.061 1.298-.049-1.381-.278-2.335-1.522-2.304-2.853.388.215.83.344 1.301.359-1.279-.855-1.641-2.544-.889-3.835 1.416 1.738 3.533 2.881 5.92 3.001-.419-1.796.944-3.527 2.799-3.527.825 0 1.572.349 2.096.907.654-.128 1.27-.368 1.824-.697-.215.671-.67 1.233-1.263 1.589.581-.07 1.135-.224 1.649-.453-.384.578-.87 1.084-1.433 1.489z"/></svg>
-          </a>
-        </span>
-
-        <!-- RSS icon -->
-        {% if site.gems contains "jekyll-feed" %}
-          <span class="my-span-icon">
-            <a href="{{ "/feed.xml" | relative_url }}" aria-label="RSS feed" title="{{ site.github_username }}'s RSS feed">
-              <svg class="my-svg-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M12 0c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm-3.374 17c-.897 0-1.626-.727-1.626-1.624s.729-1.624 1.626-1.624 1.626.727 1.626 1.624-.729 1.624-1.626 1.624zm3.885 0c-.03-3.022-2.485-5.474-5.511-5.504v-2.406c4.361.03 7.889 3.555 7.92 7.91h-2.409zm4.081 0c-.016-5.297-4.303-9.571-9.592-9.594v-2.406c6.623.023 11.985 5.384 12 12h-2.408z"/></svg>
-            </a>
-          </span>
-        {% endif %}
-        <!-- Contact icon -->
-        {% assign about_page = site.pages | where: "path", "about.md" | first %}
-        {% if about_page.title %}
-          <span class="my-span-icon">
-            <a href="{{ about_page.url | relative_url }}" aria-label="Contact" title="Contact {{ site.github_username }}">
-              <svg class="my-svg-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M12 .02c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm6.99 6.98l-6.99 5.666-6.991-5.666h13.981zm.01 10h-14v-8.505l7 5.673 7-5.672v8.504z"/></svg>
-            </a>
-          </span>
-        {% endif %}
-	      <br>
-	      <a href="https://www.ndt3.me/legal/privacy.html">Privacy Policy</a>
-
-      </footer>
-    </section>
+		  {{ content }}
+	</div>
+	
+	<div class="footer-dark">
+        <footer>
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-6 col-md-3 item">
+                        <h3>Some heading here...</h3>
+                        <ul>
+                            <li><a href="https://status.truewinter.dev">Status</a></li>
+                            <li><a href="https://truewinter.dev/reflinks.html">Referral Links</a></li>
+                            <li><a href="https://donate.truewinter.dev">Donate</a></li>
+                            <li><a href="https://somebody-on.cc">somebody-on.cc&nbsp;</a><a href="https://truewinter.dev/somebody-on.cc.html">(why?) </a></li>
+                        </ul>
+                    </div>
+                    <div class="col-sm-6 col-md-3 item">
+                        <h3>Legal</h3>
+                        <ul>
+                            <li><a href="https://truewinter.dev/legal/privacy.html">Privacy Policy</a></li>
+                            <li><a href="https://truewinter.dev/legal/security.html">Security</a></li>
+                            <li><a href="https://truewinter.dev/legal/disclaimer.html">Email Disclaimer</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-md-6 item text">
+                        <h3>TrueWinter</h3>
+                        <p>I'm probably more well-known by my previous online name, NdT3, but I never really liked that name.</p>
+                    </div>
+                    <div class="col item social">
+                        <div class="social-icons"><a target="_blank" href="https://l.truewinter.dev/github"><i class="fab fa-github"></i></a><a target="_blank" href="https://l.truewinter.dev/twitter"><i class="fab fa-twitter"></i></a><a target="_blank" href="https://blog.truewinter.dev/"><i class="fas fa-blog"></i></a><a target="_blank" href="https://l.truewinter.dev/discord"><i class="fab fa-discord"></i></a></div>
+                    </div>
+                </div>
+                <p class="copyright">Nicholis du Toit © 2020</p>
+            </div>
+        </footer>
+	</div>
 
     {% if site.google_analytics %}
       <!--<script type="text/javascript">
@@ -192,70 +206,70 @@ display:block
 }
 </style>
 </noscript>
-<script src="/js/ads.js"></script>
-<!--<script id="dsq-count-scr" data-src="https://ndt3-blog.disqus.com/count.js" async></script>-->
+<!--<script src="/js/ads.js"></script>-->
+<script id="dsq-count-scr" data-src="https://ndt3-blog.disqus.com/count.js" async></script>
 <script>
 window.addEventListener("load", function(){
-if (!document.getElementById('JyHSWMQrYFPg')) {
+/*if (!document.getElementById('JyHSWMQrYFPg')) {
 for (var i = 0; i < document.getElementsByClassName('ad').length; i++) {
 document.getElementsByClassName('ad')[i].innerHTML = "<span style=\"font-size:small;\">Advertisement</span><br><span style=\"background-color:red;color:white;padding:5px;border-radius:10px;\">Please consider whitelisting this website in your ad blocker</span>";
 document.getElementsByClassName('ad')[i].style.margin = "20px";
 }
-}
+}*/
 // This was taking too long to load, so moving it to after page load
-document.getElementById('dsq-count-scr').setAttribute('src', document.getElementById('dsq-count-scr').getAttribute('data-src'));
+<!--document.getElementById('dsq-count-scr').setAttribute('src', document.getElementById('dsq-count-scr').getAttribute('data-src'));-->
 });
 	function loadAdScript() {
 		// I know this ad loading script code is really bad but all other methods failed
 		if (document.getElementsByTagName('article').length==0) return;
-	var a = document.getElementsByTagName('article')[0].children[2].children;
-var r = [];
-var q = [];
-var every = '300';
-for (var i=0;i<a.length;i++){
-	if (a[i].nodeName==='P') {
-		console.log(a[i]);
-		r.push(a[i]);
-	}
-}
-console.log(r);
-var cu = 0;
-var cc = 0;
-var ca = [];
-for (var c=0;c<r.length;c++){
-	console.log(r[c].clientHeight);
-	if (r[c].clientHeight<every) {
-		//console.log('C');
-		//r[c].addAfter = false;
-		//for (var l=0;l<r.length
-		cc += r[c].clientHeight;
-		if (cc > every) {
-			if (r[c].children.length > 0) {
-				if (r[c].children[0].nodeName=='IMG') {
-					continue;
-				}
-			} else {
-				console.log(r[c].children);
-				ca.push(r[c]);
-				cc = 0;
+		var a = document.getElementsByTagName('article')[0].children[2].children;
+		var r = [];
+		var q = [];
+		var every = '300';
+		for (var i=0;i<a.length;i++){
+			if (a[i].nodeName==='P') {
+				console.log(a[i]);
+				r.push(a[i]);
 			}
 		}
-	}
-}
-console.log(ca);
-for (var s=0;s<ca.length;s++){
-	//$0.parentNode.insertAdjacentHTML('afterEnd', 'Test');
-//<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-3285187781774116" data-ad-slot="5173263456" data-ad-format="auto" data-full-width-responsive="true"></ins>
-	ca[s].insertAdjacentHTML ("beforebegin", '<div class="ndt3-google-ad"><span style="font-size:small;">Advertisement</span><br/><ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-3285187781774116" data-ad-slot="5173263456" data-ad-format="auto" data-full-width-responsive="true"></ins></div>');
-}
-	if (typeof(window.adsbygoogle)=='undefined') {
-		loadGAds();
-	}
-for (var p=0;p<ca.length;p++) {
-	(adsbygoogle = window.adsbygoogle || []).push({});
-}
+		console.log(r);
+		var cu = 0;
+		var cc = 0;
+		var ca = [];
+		for (var c=0;c<r.length;c++){
+			console.log(r[c].clientHeight);
+			if (r[c].clientHeight<every) {
+				//console.log('C');
+				//r[c].addAfter = false;
+				//for (var l=0;l<r.length
+				cc += r[c].clientHeight;
+				if (cc > every) {
+					if (r[c].children.length > 0) {
+						if (r[c].children[0].nodeName=='IMG') {
+							continue;
+						}
+					} else {
+						console.log(r[c].children);
+						ca.push(r[c]);
+						cc = 0;
+					}
+				}
+			}
+		}
+		console.log(ca);
+		for (var s=0;s<ca.length;s++){
+			//$0.parentNode.insertAdjacentHTML('afterEnd', 'Test');
+		//<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-3285187781774116" data-ad-slot="5173263456" data-ad-format="auto" data-full-width-responsive="true"></ins>
+			ca[s].insertAdjacentHTML ("beforebegin", '<div class="ndt3-google-ad"><span style="font-size:small;">Advertisement</span><br/><ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-3285187781774116" data-ad-slot="5173263456" data-ad-format="auto" data-full-width-responsive="true"></ins></div>');
+		}
+			if (typeof(window.adsbygoogle)=='undefined') {
+				loadGAds();
+			}
+		for (var p=0;p<ca.length;p++) {
+			(adsbygoogle = window.adsbygoogle || []).push({});
+		}
 	
-}
+	}
 	
 function loadGAds() {
 	var element = document.createElement("script");
@@ -279,9 +293,9 @@ function NdT3LazyLoad() {
 	  
 	
 	function initScripts() {
-		NdT3LazyLoad();
-		loadGAds();
-		loadAdScript();
+		//NdT3LazyLoad();
+		//loadGAds();
+		//loadAdScript();
 	}
 	
 	window.onload = initScripts;
@@ -289,7 +303,7 @@ function NdT3LazyLoad() {
 </script>
 	  
 	    <!-- Pride Month -->
-  <script src="https://www.ndt3.me/custom/pride.js"></script>
+  <!--<script src="https://www.ndt3.me/custom/pride.js"></script>-->
 	  <!--<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 <script>
      (adsbygoogle = window.adsbygoogle || []).push({
@@ -297,5 +311,12 @@ function NdT3LazyLoad() {
           enable_page_level_ads: true
      });
 </script>-->
+	<script src="/assets/js/jquery.min.js"></script>
+    <script src="/assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="/assets/js/script.min.js"></script>
+	<!--<script src="https://cdn.firebase.com/js/client/2.2.1/firebase.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.0/moment.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/blueimp-md5/2.1.0/js/md5.js"></script>
+	<script src="/js/blog.js"></script>-->
   </body>
 </html>

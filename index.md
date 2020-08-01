@@ -7,5 +7,3 @@
 #
 layout: home
 ---
-
-This is my blog. **If you are looking for my website, [please click here](https://www.ndt3.me)**

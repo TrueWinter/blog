@@ -4,7 +4,7 @@ layout: default
 <article itemscope itemtype="http://schema.org/BlogPosting">
 	
 <style>
-    input[type=text], input[type=email], textarea {
+    /*input[type=text], input[type=email], textarea {
         width: 100%;
         padding: 12px;
         border: 1px solid #ccc;
@@ -55,7 +55,7 @@ layout: default
 
     .success {
 	color: #4caf50;
-    }
+    }*/
 </style>
 
   <!-- <header class="post-header">
@@ -95,12 +95,62 @@ document.getElementById('rTime').innerText = rTm;*/
 			  }
 		  </style>
 	  </noscript>
-	<a href="/">Back to the blog's home page</a><br>
-<div class="ad" style="text-align: center;font-size: small;">Advertisement<center><iframe data-aa="887950" src="" data-src="//ad.a-ads.com/887950?size=300x250" scrolling="no" style="width:300px; height:250px; border:0px; padding:0;overflow:hidden" allowtransparency="true"></iframe></center></div>
+<!--<div class="ad" style="text-align: center;font-size: small;">Advertisement<center><iframe data-aa="887950" src="" data-src="//ad.a-ads.com/887950?size=300x250" scrolling="no" style="width:300px; height:250px; border:0px; padding:0;overflow:hidden" allowtransparency="true"></iframe></center></div>
 <noscript>
 <div class="ad-ns" style="text-align: center;font-size: small;">Advertisement<center><iframe data-aa="887950" src="//ad.a-ads.com/887950?size=300x250" scrolling="no" style="width:300px; height:250px; border:0px; padding:0;overflow:hidden" allowtransparency="true"></iframe></center></div>
-</noscript><h2>Comments</h2>
-<!--<div id="disqus_thread"></div>
+</noscript>-->
+<!--<h2 id="comments">Comments</h2>
+
+<div id="graphcomment"></div>
+<script type="text/javascript">
+
+  /* - - - CONFIGURATION VARIABLES - - - */
+
+  // make sure the id is yours
+  window.gc_params = {
+    graphcomment_id: 'TrueWinter',
+
+    // if your website has a fixed header, indicate it's height in pixels
+    fixed_header_height: 0,
+  };
+
+  /* - - - DON'T EDIT BELOW THIS LINE - - - */
+
+  
+  (function() {
+    var gc = document.createElement('script'); gc.type = 'text/javascript'; gc.async = true; gc.id = 'graphcommentScript';
+    gc.src = 'https://graphcomment.com/js/integration.js?' + Math.round(Math.random() * 1e8);
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(gc);
+  })();
+
+</script>-->
+
+<h2>Comments</h2>
+
+<!--<h3>Leave a comment</h3>
+
+<form id="addComments">
+	<div class="row">
+		<div class="form-group col-md">
+			<input type="text" class="form-control" id="name" placeholder="Name">
+		</div>
+		<div class="form-group col-md">
+			<input type="email" class="form-control" id="email" placeholder="Email">
+		</div>
+	</div>
+	
+	<div class="form-group">
+		<textarea class="form-control commentsTextarea" maxlength="3000" id="commentsTextarea" placeholder="Comment"></textarea>
+	</div>
+
+	<div class="form-group">
+		<button type="submit" class="btn btn-primary">Post Comment</button>
+	</div>
+</form>
+
+<div class="comments"></div>-->
+
+<div id="disqus_thread"></div>
 <script>
 
 /**
@@ -118,14 +168,14 @@ s.src = 'https://ndt3-blog.disqus.com/embed.js';
 s.setAttribute('data-timestamp', +new Date());
 (d.head || d.body).appendChild(s);
 })();
-</script>-->
-	  <script src="https://blog.ndt3.me/js/comments.js"></script>
+</script>
+	<script src="/js/comments.js"></script>
 <div class="disqus"></div>
 <script>
 var dsq_options = {
   scriptUrl: '//ndt3-blog.disqus.com/embed.js',
   disqusConfig: function() {
-this.page.url = document.location.href.replace(document.location.search, '');
+	this.page.url = document.location.href.replace(document.location.search, '').replace('ndt3.me', 'truewinter.dev');
   }
 };
 
@@ -142,7 +192,13 @@ disqusLoader( '.disqus', dsq_options );
   </div>
 	<script id="dsq-count-scr" data-src="https://ndt3-blog.disqus.com/count.js" async></script>
 
-  {% if site.disqus.shortname %}
-    {% include disqus_comments.html %}
-  {% endif %}
+	<script>
+		window.addEventListener('load', function() {
+			if (location.hash && $(location.hash).length > 0) {
+                $('html,body').animate({
+                    scrollTop: $(location.hash).offset().top - $('.navbar').outerHeight()
+                });
+            }
+		});
+	</script>
 </article>
