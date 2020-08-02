@@ -189,8 +189,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 	console.log('Not tracking');
 	}
       </script>-->
-	  <script src="https://wd-static1.ndt3.me/js/gascrolltracking.js"></script>
-	  <script>NdT3_GA_ST_init('{{ site.google_analytics }}', true)</script>
+		<script src="https://wd-static1.ndt3.me/js/gascrolltracking.js"></script>
+		<script>
+			if (!(location.hash && location.hash === '#comments')) {
+				NdT3_GA_ST_init('{{ site.google_analytics }}', true);
+            }
+		</script>
     {% endif %}
 <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-lazyload/12.0.3/lazyload.min.js"></script>
 <script>
