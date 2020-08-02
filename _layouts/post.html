@@ -149,6 +149,8 @@ document.getElementById('rTime').innerText = rTm;*/
 						} else {
 							$("#comment-form-result")[0].style = "background-color:rgb(48, 48, 48);border-radius:5px;padding:10px;margin-bottom:8px;display:inline-block;color:white;";
 							$("#addComments")[0].reset();
+							location.hash = '#comments';
+							location.reload();
 						}
 						if (grecaptcha) {
 							grecaptcha.reset();
