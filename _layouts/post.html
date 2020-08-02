@@ -2,61 +2,6 @@
 layout: default
 ---
 <article itemscope itemtype="http://schema.org/BlogPosting">
-	
-<style>
-    /*input[type=text], input[type=email], textarea {
-        width: 100%;
-        padding: 12px;
-        border: 1px solid #ccc;
-        border-radius: 4px;
-        box-sizing: border-box;
-        margin-top: 6px;
-        margin-bottom: 16px;
-        resize: vertical;
-    }
-
-    input[type=submit] {
-        background-color: #4CAF50;
-        color: white;
-        padding: 12px 20px;
-        border: none;
-        border-radius: 4px;
-
-    }
-
-    input[type=submit]:hover {
-        background-color: #45a049;
-    }
-
-    .submit-button {
-        background-color: #4CAF50;
-        color: white;
-        padding: 12px 20px;
-        border: none;
-        border-radius: 4px;
-
-    }
-
-    .submit-button:hover {
-        background-color: #45a049;
-    }
-
-    .nojs {
-        background-color: #a04745;
-        color: white;
-        padding: 12px 20px;
-        border: none;
-        border-radius: 4px;
-    }
-
-    .error {
-      color: #d23935;
-    }
-
-    .success {
-	color: #4caf50;
-    }*/
-</style>
 
   <!-- <header class="post-header">
     <h1 class="post-title" itemprop="name headline">{{ page.title | escape }}</h1>
@@ -125,33 +70,482 @@ document.getElementById('rTime').innerText = rTm;*/
 
 </script>-->
 
-<h2>Comments</h2>
+<h2 id="comments">Comments</h2>
 
-<!--<h3>Leave a comment</h3>
+<h3>Leave a comment</h3>
 
 <form id="addComments">
+	<div id="comment-form-result"></div>
+	<input type="hidden" name="post" id="postId">
 	<div class="row">
 		<div class="form-group col-md">
-			<input type="text" class="form-control" id="name" placeholder="Name">
+			<input type="text" class="form-control" placeholder="Name" name="name">
 		</div>
 		<div class="form-group col-md">
-			<input type="email" class="form-control" id="email" placeholder="Email">
+			<input type="email" class="form-control" placeholder="Email" name="email">
 		</div>
 	</div>
 	
 	<div class="form-group">
-		<textarea class="form-control commentsTextarea" maxlength="3000" id="commentsTextarea" placeholder="Comment"></textarea>
+		<textarea class="form-control commentsTextarea" maxlength="2000" id="commentsTextarea" placeholder="Comment" name="comment"></textarea>
+	</div>
+	
+	<div class="form-group">
+		<div class="form-group"><div class="g-recaptcha d-inline-flex" data-sitekey="6LeIjiwUAAAAAJTldNRQIgPEgF-FF8Arsym0CFNW" data-theme="dark" data-callback="recaptchaCallback" data-expired-callback="recaptchaExpiredCallback"></div>
+		<script id="recaptcha-lazy" data-src="https://www.google.com/recaptcha/api.js"></script>
 	</div>
 
 	<div class="form-group">
-		<button type="submit" class="btn btn-primary">Post Comment</button>
+		<button type="submit" class="btn btn-primary" id="comment-form-btn">Post Comment</button><span class="spinner-border text-success" role="status" id="comment-form-spinner" style="display:none;"></span>
 	</div>
 </form>
 
-<div class="comments"></div>-->
-
-<div id="disqus_thread"></div>
+<style>.invalid-form-data{border:1px solid #f66!important;border-radius:3px!important}</style>
 <script>
+	window.addEventListener('load', function() {
+		$('#postId').val(location.pathname.slice(1).replace(/\//g, '-').replace('.html', ''));
+		$("#addComments").submit(function (e) {
+			e.preventDefault();
+			var post = true;
+			$('[name="email"]').first().removeClass('invalid-form-data');
+			$('[name="name"]').first().removeClass('invalid-form-data');
+			$('[name="comment"]').first().removeClass('invalid-form-data');
+			if (recaptcha) {
+				$(".g-recaptcha").first().removeClass('invalid-form-data');
+			}
+			var red = "#F66";
+			if (!($('[name="email"]')[0].value.match(/^[a-zA-Z0-9-.]+@[a-zA-Z0-9-.]+\.[a-zA-Z]{2,6}$/gi))) {
+				$('[name="email"]').first().addClass('invalid-form-data');
+				post = false;
+			}
+			if(!($('[name="name"]')[0].value.match(/^[a-zA-Z0-9\'\- ]+$/gi))) {
+				$('[name="name"]').first().addClass('invalid-form-data');
+				post = false;
+			}
+			if ($('[name="comment"]')[0].value == "") {
+				$('[name="comment"]').first().addClass('invalid-form-data');
+				post = false;
+			}
+			if (grecaptcha) {
+				if (grecaptcha.getResponse() === "") {
+					$(".g-recaptcha").first().addClass('invalid-form-data');
+					post = false;
+				}
+			}
+			if (post) {
+				$('#comment-form-btn').hide();
+				$('#comment-form-spinner').show();
+				$.ajax({
+					type: "POST",
+					data : $(this).serialize(),
+					cache: false,
+					url: 'https://comments-api.truewinter.dev/comment',
+					success: function(data){
+						$('#comment-form-btn').show();
+						$('#comment-form-spinner').hide();
+						$("#comment-form-result").html(data.message);
+						if (data.success === false) {
+							$("#comment-form-result")[0].style = "background-color:"+red+";border-radius:5px;padding:10px;margin-bottom:8px;color:white;";
+						} else {
+							$("#comment-form-result")[0].style = "background-color:rgb(48, 48, 48);border-radius:5px;padding:10px;margin-bottom:8px;display:inline-block;color:white;";
+							$("#addComments")[0].reset();
+						}
+						if (grecaptcha) {
+							grecaptcha.reset();
+						}
+						$("html, body").animate({
+							scrollTop: $("#comments").offset().top - 100
+						}, 500);
+					}
+				});
+			} else {
+				$('.invalid-form-data').off('input');
+				$('.invalid-form-data').on('input', function(e) {
+					if ($(e.target).val() === "") {
+						$(e.target).addClass('invalid-form-data');
+					} else {
+						$(e.target).removeClass('invalid-form-data');
+					}
+				});
+				$("html, body").animate({
+					scrollTop: $("#comments").offset().top - 100
+				}, 500);
+			}
+			return false;
+		});
+		
+		// https://coderwall.com/p/fnvjvg/jquery-test-if-element-is-in-viewport
+
+		$.fn.isOnScreen = function() {
+
+			var win = $(window);
+
+			var viewport = {
+				top : win.scrollTop(),
+				left : win.scrollLeft()
+			};
+			viewport.right = viewport.left + win.width();
+			viewport.bottom = viewport.top + win.height();
+
+			var bounds = this.offset();
+			bounds.right = bounds.left + this.outerWidth();
+			bounds.bottom = bounds.top + this.outerHeight();
+
+			return (!(viewport.right < bounds.left || viewport.left > bounds.right || viewport.bottom < bounds.top || viewport.top > bounds.bottom));
+
+		}
+		
+		function loadRecaptchaIfInViewport() {
+			if($('.g-recaptcha').isOnScreen()) {
+				if (!$('#recaptcha-lazy').attr('src')) {
+					$('#recaptcha-lazy').attr('src', $('#recaptcha-lazy').data('src'));
+				}
+			}
+		}
+		
+		$(window).on('scroll', function() {
+			loadRecaptchaIfInViewport();
+		});
+		
+		loadRecaptchaIfInViewport();
+		
+		window.recaptchaCallback = function() {
+			$(".g-recaptcha").first().removeClass('invalid-form-data');
+		}
+		
+		window.recaptchaExpiredCallback = function() {
+			$(".g-recaptcha").first().addClass('invalid-form-data');
+		}
+	});
+</script>
+
+<div id="tw-comments"></div>
+<span class="spinner-border text-success" role="status" id="comments-spinner" style="display:none;"></span>
+<div id="tw-reply-box">
+	<div id="replyModal" class="modal" tabindex="-1" role="dialog">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title">Reply</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<form id="comment-reply-form">
+						<div id="reply-form-result"></div>
+						<input type="text" name="inReplyTo" id="tw-reply-form-reply-to">
+						<input type="text" name="inReplyType" id="tw-reply-form-reply-type">
+						<input type="text" name="inReplyPost" id="tw-reply-form-reply-post">
+						<div class="form-group">
+							<input type="text" class="form-control" name="tw-rf-name" placeholder="Name" id="tw-reply-form-name">
+						</div>
+						<div class="form-group">
+							<input type="email" class="form-control" name="tw-rf-email" placeholder="Email" id="tw-reply-form-email">
+						</div>
+						<div class="form-group">
+							<textarea name="tw-rf-comment" class="form-control" maxlength="2000" placeholder="Comment" id="tw-reply-form-comment"></textarea>
+						</div>
+						<div class="form-group">
+							<div class="g-recaptcha-reply d-inline-flex" data-theme="dark" data-callback="recaptchaCallbackReply" data-expired-callback="recaptchaExpiredCallbackReply"></div>
+							<!--<script id="recaptcha-reply-lazy" data-src="https://www.google.com/recaptcha/api.js"></script>-->
+						</div>
+						<div class="form-group">
+							<button class="btn btn-primary" id="reply-form-btn">Comment</button><span class="spinner-border text-success" role="status" id="reply-form-spinner" style="display:none;"></span>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<style>
+.comment {
+    margin-bottom: 8px;
+}
+.reply {
+    margin-left: 64px;
+    margin-top: 8px;
+}
+.comment-name, .reply-name {
+    font-size: xx-large;
+}
+.comment-reply {
+	margin-left: 4px;
+	border-left: 1px solid black;
+}
+.comment-reply-btn {
+	margin-left: 4px;
+}
+</style>
+
+
+<script>
+function loadComments() {
+	var xhr = new XMLHttpRequest();
+	xhr.open('GET', 'https://comments-api.truewinter.dev/comments/'+encodeURIComponent(btoa(location.pathname.slice(1).replace(/\//g, '-').replace('.html', ''))));
+	xhr.onload = function() {
+		$('#comments-spinner').hide();
+		var data = JSON.parse(this.responseText);
+		if (data.success === false) {
+			return document.getElementById('tw-comments').innerText = 'Failed to load comments';
+		}
+		
+		var twcomments = data.data.comments;
+		var replies = data.data.replies;
+		
+		function getReplies(id) {
+			var r = [];
+			for (var i = 0; i < replies.length; i++) {
+				if(replies[i].in_reply_to === id)  {
+					r.push(replies[i]);
+				}
+			}
+			return r;
+		}
+
+		function createCommentElement(comment) {
+			// Comment
+			var e = document.createElement('div');
+			e.setAttribute('data-comment-id', comment.id);
+			e.className = 'comment';
+			var tb = document.createElement('table');
+			var tr = document.createElement('tr');
+			var td1 = document.createElement('td');
+			var td2 = document.createElement('td');
+			var ei = document.createElement('img');
+			ei.setAttribute('data-email-hash', comment.email_hash);
+			ei.src = 'https://www.gravatar.com/avatar/'+comment.email_hash+'?s=50&d=identicon';
+			ei.className = 'comment-image';
+			var n = document.createElement('div');
+			n.innerText = comment.name;
+			n.className = 'comment-name';
+			var t = document.createElement('div');
+			t.innerText = comment.time;
+			t.className = 'comment-time';
+			var cr = document.createElement('span');
+			cr.className = 'comment-reply';
+			var crb = document.createElement('a');
+			crb.href = '#';
+			crb.innerText = 'Reply';
+			crb.className = 'comment-reply-btn';
+			crb.setAttribute('data-tw-crb-id', comment.id);
+			crb.setAttribute('data-tw-crb-type', 'comment');
+			crb.onclick = replyForm;
+			cr.appendChild(crb);
+			t.appendChild(cr);
+			var c = document.createElement('div');
+			c.innerText = comment.comment;
+			c.className = 'comment-text';
+			td1.appendChild(ei);
+			td2.appendChild(n);
+			td2.appendChild(t);
+			td2.appendChild(c);
+			tr.appendChild(td1);
+			tr.appendChild(td2);
+			tb.appendChild(tr);
+			e.appendChild(tb);
+			
+			document.getElementById('tw-comments').appendChild(e);
+			
+			addReplies(comment.id);
+			
+		}
+
+		function addReplies(id) {
+			var rp = getReplies(id);
+			//console.log(rp);
+			
+			for (var i = 0; i < rp.length; i++) {
+				//console.log('reply');
+				$('[data-comment-id=\''+id+'\']').append(createReplyElement(rp[i]));
+				
+				addReplies(rp[i].id);
+				
+			}
+		}
+
+		function createReplyElement(reply) {
+			var e = document.createElement('div');
+			e.setAttribute('data-comment-id', reply.id);
+			e.setAttribute('data-in-reply-to', reply.in_reply_to);
+			e.className = 'reply';
+			var tb = document.createElement('table');
+			var tr = document.createElement('tr');
+			var td1 = document.createElement('td');
+			var td2 = document.createElement('td');
+			var ei = document.createElement('img');
+			ei.setAttribute('data-email-hash', reply.email_hash);
+			ei.src = 'https://www.gravatar.com/avatar/'+reply.email_hash+'?s=50&d=identicon';
+			ei.className = 'reply-image';
+			var n = document.createElement('div');
+			n.innerText = reply.name;
+			n.className = 'reply-name';
+			var t = document.createElement('div');
+			t.innerText = reply.time;
+			t.className = 'reply-time';
+			var cr = document.createElement('span');
+			cr.className = 'comment-reply';
+			var crb = document.createElement('a');
+			crb.href = '#';
+			crb.innerText = 'Reply';
+			crb.className = 'comment-reply-btn';
+			crb.setAttribute('data-tw-crb-id', reply.id);
+			crb.setAttribute('data-tw-crb-type', 'reply');
+			crb.onclick = replyForm;
+			cr.appendChild(crb);
+			t.appendChild(cr);
+			var c = document.createElement('div');
+			c.innerText = reply.comment;
+			c.className = 'reply-text';
+			td1.appendChild(ei);
+			td2.appendChild(n);
+			td2.appendChild(t);
+			td2.appendChild(c);
+			tr.appendChild(td1);
+			tr.appendChild(td2);
+			tb.appendChild(tr);
+			e.appendChild(tb);
+			return e;
+		}
+
+		for (var i = 0; i < twcomments.length; i++) {
+			//console.log('Comment:');
+			//console.log(comments[i]);
+			createCommentElement(twcomments[i]);
+			//console.log('Replies:');
+			//console.log(getReplies(comments[i].id));
+		}
+		
+		var replyRecaptchaRendered = false;
+
+		function replyForm(e) {
+			e.preventDefault();
+			
+			var replyCaptchaComplete = false;
+			
+			$("#comment-reply-form").submit(function (e) {
+				e.preventDefault();
+				var post = true;
+				$('[name="tw-rf-email"]').first().removeClass('invalid-form-data');
+				$('[name="tw-rf-name"]').first().removeClass('invalid-form-data');
+				$('[name="tw-rf-comment"]').first().removeClass('invalid-form-data');
+				if (recaptcha) {
+					$(".g-recaptcha-reply").first().removeClass('invalid-form-data');
+				}
+				var red = "#F66";
+				if (!($('[name="tw-rf-email"]')[0].value.match(/^[a-zA-Z0-9-.]+@[a-zA-Z0-9-.]+\.[a-zA-Z]{2,6}$/gi))) {
+					$('[name="tw-rf-email"]').first().addClass('invalid-form-data');
+					post = false;
+				}
+				if(!($('[name="tw-rf-name"]')[0].value.match(/^[a-zA-Z0-9\'\- ]+$/gi))) {
+					$('[name="tw-rf-name"]').first().addClass('invalid-form-data');
+					post = false;
+				}
+				if ($('[name="tw-rf-comment"]')[0].value == "") {
+					$('[name="tw-rf-comment"]').first().addClass('invalid-form-data');
+					post = false;
+				}
+				if (grecaptcha) {
+					//if (grecaptcha.getResponse() === "") {
+					if (!replyCaptchaComplete) {
+						$(".g-recaptcha-reply").first().addClass('invalid-form-data');
+						post = false;
+					}
+				}
+				if (post) {
+					$('#reply-form-btn').hide();
+					$('#reply-form-spinner').show();
+					$.ajax({
+						type: "POST",
+						data : $(this).serialize(),
+						cache: false,
+						url: 'https://comments-api.truewinter.dev/reply',
+						success: function(data){
+							$('#reply-form-btn').show();
+							$('#reply-form-spinner').hide();
+							$("#reply-form-result").html(data.message);
+							if (data.success === false) {
+								$("#reply-form-result")[0].style = "background-color:"+red+";border-radius:5px;padding:10px;margin-bottom:8px;color:white;";
+							} else {
+								$("#reply-form-result")[0].style = "background-color:rgb(48, 48, 48);border-radius:5px;padding:10px;margin-bottom:8px;display:inline-block;color:white;";
+								$("#comment-reply-form")[0].reset();
+								$('#replyModal').modal('hide');
+								location.hash = '#comments';
+								location.reload();
+							}
+							if (grecaptcha) {
+								grecaptcha.reset();
+							}
+						}
+					});
+				} else {
+					$('.invalid-form-data').off('input');
+					$('.invalid-form-data').on('input', function(e) {
+						if ($(e.target).val() === "") {
+							$(e.target).addClass('invalid-form-data');
+						} else {
+							$(e.target).removeClass('invalid-form-data');
+						}
+					});
+				}
+				return false;
+			});
+			
+			//console.log('replyform');
+			console.log($(this).data('tw-crb-id'));
+			console.log($(this).data('tw-crb-type'));
+			$('#tw-reply-form-reply-to').val($(this).data('tw-crb-id'));
+			$('#tw-reply-form-reply-type').val($(this).data('tw-crb-type'));
+			$('#tw-reply-form-reply-post').val(location.pathname.slice(1).replace(/\//g, '-').replace('.html', ''));
+			if (!replyRecaptchaRendered) {
+				//console.log(replyRecaptchaRendered);
+				grecaptcha.render($('.g-recaptcha-reply')[0], {'sitekey' : '6LeIjiwUAAAAAJTldNRQIgPEgF-FF8Arsym0CFNW'});
+				replyRecaptchaRendered = true;
+				window.rrr = replyRecaptchaRendered;
+			}
+			//if (!$('#recaptcha-reply-lazy').attr('src')) {
+				//$('#recaptcha-reply-lazy').attr('src', $('#recaptcha-reply-lazy').data('src'));
+			//}
+			window.recaptchaCallbackReply = function() {
+                $(".g-recaptcha-reply").first().removeClass('invalid-form-data');
+				replyCaptchaComplete = true;
+            }
+            
+            window.recaptchaExpiredCallbackReply = function() {
+                $(".g-recaptcha-reply").first().addClass('invalid-form-data');
+				replyCaptchaComplete = false;
+            }
+			$('#replyModal').modal('show');
+		}
+	}
+	xhr.send();
+}
+
+window.addEventListener('load', function() {
+	var commentsLoaded = false;
+	function loadCommentsIfInView() {
+		if (commentsLoaded) return;
+		if($('#tw-comments').isOnScreen()) {
+			$('#comments-spinner').show();
+			loadComments();
+			commentsLoaded = true;
+		}
+	}
+	
+	$(window).on('scroll', function() {
+		loadCommentsIfInView();
+	});
+	
+	loadCommentsIfInView();
+	
+});
+
+</script>
+
+<!--<div id="disqus_thread"></div>-->
+<!--<script>
 
 /**
 *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
@@ -190,7 +584,7 @@ disqusLoader( '.disqus', dsq_options );
 		});
 	  </script>
   </div>
-	<script id="dsq-count-scr" data-src="https://ndt3-blog.disqus.com/count.js" async></script>
+	<script id="dsq-count-scr" data-src="https://ndt3-blog.disqus.com/count.js" async></script>-->
 
 	<script>
 		window.addEventListener('load', function() {
