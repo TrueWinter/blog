@@ -17,11 +17,11 @@ title: TrueWinter Blog
 author: TrueWinter
 email: spam@truewinter.dev
 description: > # this means to ignore newlines until "baseurl:"
-  NdT3Development's Blog
+  TrueWinter's Blog
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "https://blog.truewinter.dev" # the base hostname & protocol for your site, e.g. http://example.com
-twitter_username: NdT3_
-github_username:  NdT3Development
+twitter_username: TrueWinter1
+github_username:  TrueWinter
 google_analytics: UA-104398508-3
 image: /assets/img/tw-temp-new-logo-sq-v2-64.jpg
 
