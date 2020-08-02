@@ -291,6 +291,29 @@ document.getElementById('rTime').innerText = rTm;*/
 
 <script>
 function loadComments() {
+	function getCookie(cname) {
+		var name = cname + "=";
+		var decodedCookie = decodeURIComponent(document.cookie);
+		var ca = decodedCookie.split(';');
+		for(var i = 0; i <ca.length; i++) {
+			var c = ca[i];
+			while (c.charAt(0) == ' ') {
+				c = c.substring(1);
+			}
+			if (c.indexOf(name) == 0) {
+				return c.substring(name.length, c.length);
+			}
+		}
+		return "";
+	}
+	if (getCookie('tw-comments-login')) {
+		var c = document.createElement('input');
+		c.type = 'hidden';
+		c.name = 'tw-comments-login';
+		c.value = getCookie('tw-comments-login');
+		$('#addComments').append(c);
+	}
+	
 	var xhr = new XMLHttpRequest();
 	xhr.open('GET', 'https://comments-api.truewinter.dev/comments/'+encodeURIComponent(btoa(location.pathname.slice(1).replace(/\//g, '-').replace('.html', ''))));
 	xhr.onload = function() {
@@ -328,7 +351,11 @@ function loadComments() {
 			ei.src = 'https://www.gravatar.com/avatar/'+comment.email_hash+'?s=50&d=identicon';
 			ei.className = 'comment-image';
 			var n = document.createElement('div');
-			n.innerText = comment.name;
+			if (comment.isTrueWinter) {
+				n.innerHTML = comment.name + "<i class=\"the-truewinter fa fa-check-circle\" title=\"This is the real TrueWinter\"></i>";
+			} else {
+				n.innerText = comment.name;
+			}
 			n.className = 'comment-name';
 			var t = document.createElement('div');
 			t.innerText = comment.time;
