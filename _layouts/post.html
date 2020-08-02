@@ -91,7 +91,7 @@ document.getElementById('rTime').innerText = rTm;*/
 	</div>
 	
 	<div class="form-group">
-		<div class="form-group"><div class="g-recaptcha d-inline-flex" data-sitekey="6LeIjiwUAAAAAJTldNRQIgPEgF-FF8Arsym0CFNW" data-theme="dark" data-callback="recaptchaCallback" data-expired-callback="recaptchaExpiredCallback"></div>
+		<div class="g-recaptcha d-inline-flex" data-sitekey="6LeIjiwUAAAAAJTldNRQIgPEgF-FF8Arsym0CFNW" data-theme="dark" data-callback="recaptchaCallback" data-expired-callback="recaptchaExpiredCallback"></div>
 		<script id="recaptcha-lazy" data-src="https://www.google.com/recaptcha/api.js"></script>
 	</div>
 
@@ -312,6 +312,12 @@ function loadComments() {
 		c.name = 'tw-comments-login';
 		c.value = getCookie('tw-comments-login');
 		$('#addComments').append(c);
+		var c2 = document.createElement('input');
+		c2.type = 'hidden';
+		c2.name = 'tw-comments-login';
+		c2.value = getCookie('tw-comments-login');
+		$('#comment-reply-form').append(c2);
+		$('.active').css('border-bottom', '1px solid #a32bfe');
 	}
 	
 	var xhr = new XMLHttpRequest();
@@ -417,7 +423,11 @@ function loadComments() {
 			ei.src = 'https://www.gravatar.com/avatar/'+reply.email_hash+'?s=50&d=identicon';
 			ei.className = 'reply-image';
 			var n = document.createElement('div');
-			n.innerText = reply.name;
+			if (reply.isTrueWinter) {
+				n.innerHTML = reply.name + "<i class=\"the-truewinter fa fa-check-circle\" title=\"This is the real TrueWinter\"></i>";
+			} else {
+				n.innerText = reply.name;
+			}
 			n.className = 'reply-name';
 			var t = document.createElement('div');
 			t.innerText = reply.time;
