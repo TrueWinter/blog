@@ -16,7 +16,7 @@ module Jekyll
     end
 
     def replace(content)
-      content.gsub!(/!\[(.+)\]\((.+)\)/i, '<img class=\'lazy\' data-src=\'\2\' alt=\'\1\'><noscript><img src=\'\2\' alt=\'\1\'></noscript>')
+      content.gsub!(/!\[(.+)\]\((.+)\)/i, '<img class=\'lazy img-responsive\' data-src=\'\2\' alt=\'\1\'><noscript><img src=\'\2\' alt=\'\1\'></noscript>')
       content
     end
 
