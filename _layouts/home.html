@@ -23,7 +23,7 @@ layout: default
           <a class="post-link" href="{{ post.url | relative_url }}" title="{{ post.title }}">{{ post.title | escape }}</a>
         </h2>
 		        {% assign date_format = "%b %-d, %Y" %}
-		<span class="post-meta">{{ post.date | date: date_format }} | <a href="{{ post.url }}#comments"> comments</a></span>
+		<span class="post-meta">{{ post.date | date: date_format }} | <a href="{{ post.url }}#comments">Comments</a></span>
 
         <span>{{ post.excerpt | markdownify | truncatewords: 25 }}</span>
 
@@ -44,6 +44,26 @@ layout: default
 	});
 </script>-->
 <script>
+
+window.addEventListener('load', function() {
+
+	var xhr = new XMLHttpRequest();
+	xhr.open('GET', 'https://comments-api.truewinter.dev/count');
+	xhr.onload = function() {
+		var count = JSON.parse(this.responseText);
+		if (count.success) {
+			for (var i = 0; i < count.data.length; i++) {
+				var postURL = count.data[i]._id.split('-').slice(0,3).join('/') + '/' + count.data[i]._id.split('-').slice(3).join('-')
+				console.log(postURL)
+				$('.post-link[href="/'+postURL+'"]').parent().parent().find('.post-meta').find('a').text($('.post-link[href="/'+postURL+'"]').parent().parent().find('.post-meta').find('a').text()+ ' ('+count.data[i].count+')');
+				$('.post-link[href="/'+postURL+'"]');
+			}
+		}
+	}
+	xhr.send();
+	
+});
+
 	//if (!(document.getElementsByTagName('article'))) return;
 /*	var a = document.getElementsByClassName('main-content')[0].children[1].children;
 var r = [];
