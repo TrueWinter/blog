@@ -43,6 +43,7 @@ document.getElementById('rTime').innerText = ((hn?hn+(hn===1?' hour ':' hours ')
 		</div>
 		<div class="form-group col-md">
 			<input type="email" class="form-control" placeholder="Email" name="email">
+			<small class="form-text text-muted">Your email address will be used to show a Gravatar image, but will not be published</small>
 		</div>
 	</div>
 	
@@ -62,7 +63,7 @@ document.getElementById('rTime').innerText = ((hn?hn+(hn===1?' hour ':' hours ')
 <hr>
 <script id="recaptcha-lazy" data-src="https://www.google.com/recaptcha/api.js"></script>
 
-<style>.invalid-form-data{border:1px solid #f66!important;border-radius:3px!important}</style>
+<style>.invalid-form-data{border:1px solid #f66!important;border-radius:3px!important}#tw-comments{overflow-wrap:break-word}@media only screen and (max-width: 768px) {.reply{margin-left:8px !important;margin-top:8px;border-left:1px solid #404040;}.comment{border-left:1px solid #404040}</style>
 <script>
 	{% if dev %}
 	var commentsAPI = 'http://localhost:8804';
