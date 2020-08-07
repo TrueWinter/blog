@@ -48,3 +48,4 @@ plugins:
 #   - vendor/ruby/
 
 include: ["_redirects"]
+exclude: ["ideas.txt"]

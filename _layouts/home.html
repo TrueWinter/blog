@@ -2,6 +2,13 @@
 layout: default
 ---
 
+{% assign dev = false %}
+{% for static_file in site.static_files %}
+	{% if static_file.path == '/-DEV' %}
+		{% assign dev = true %}
+	{% endif %}
+{% endfor %}
+
 <div>
 
   {{ content }}
@@ -15,45 +22,39 @@ layout: default
 <!--<div class="ndt3-google-ad"><span style="font-size:small;">Advertisement</span><br/><ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-3285187781774116" data-ad-slot="5173263456" data-ad-format="auto" data-full-width-responsive="true"></ins></div>
   <div>&nbsp;</div>-->
 
-  <ul class="post-list">
+	<ul class="post-list">
     {% for post in site.posts %}
-      <li>
+		<li>
 
-        <h2>
-          <a class="post-link" href="{{ post.url | relative_url }}" title="{{ post.title }}">{{ post.title | escape }}</a>
-        </h2>
-		        {% assign date_format = "%b %-d, %Y" %}
-		<span class="post-meta">{{ post.date | date: date_format }} | <a href="{{ post.url }}#comments">Comments</a></span>
+			<h2>
+				<a class="post-link" href="{{ post.url | relative_url }}" title="{{ post.title }}">{{ post.title | escape }}</a>
+			</h2>
+		    {% assign date_format = "%b %-d, %Y" %}
+			<span class="post-meta">{{ post.date | date: date_format }} | <a href="{{ post.url }}#comments">Comments</a></span>
 
-        <span>{{ post.excerpt | markdownify | truncatewords: 25 }}</span>
+			<span>{{ post.excerpt | markdownify | truncatewords: 25 }}</span>
 
-      </li>
+		</li>
     {% endfor %}
-  </ul>
-	
-<!--<div class="ad" style="text-align: center;font-size: small;">Advertisement<br><a href="http://a-ads.com?partner=887950">Advertise with Anonymous Ads</a><center><iframe data-aa="887950" src="" data-src="//ad.a-ads.com/887950?size=300x250" scrolling="no" style="width:300px; height:250px; border:0px; padding:0;overflow:hidden" allowtransparency="true"></iframe></center></div>
-<noscript>
-<div class="ad-ns" style="text-align: center;font-size: small;">Advertisement<br><a href="http://a-ads.com?partner=887950">Advertise with Anonymous Ads</a><center><iframe data-aa="887950" src="//ad.a-ads.com/887950?size=300x250" scrolling="no" style="width:300px; height:250px; border:0px; padding:0;overflow:hidden" allowtransparency="true"></iframe></center></div>
-</noscript>-->
-<!--<div class="ndt3-google-ad"><span style="font-size:small;">Advertisement</span><br/><ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-3285187781774116" data-ad-slot="5173263456" data-ad-format="auto" data-full-width-responsive="true"></ins></div>-->
+	</ul>
 </div>
-<!--<script id="dsq-count-scr" data-src="https://ndt3-blog.disqus.com/count.js" async></script>
-<script>
-	window.addEventListener("load", function(){
-		document.getElementById('dsq-count-scr').setAttribute('src', document.getElementById('dsq-count-scr').getAttribute('data-src'));
-	});
-</script>-->
 <script>
 
 window.addEventListener('load', function() {
 
+	{% if dev %}
+	var commentsAPI = 'http://localhost:8804';
+	{% else %}
+	var commentsAPI = 'https://comments-api.truewinter.dev';
+	{% endif %}
+
 	var xhr = new XMLHttpRequest();
-	xhr.open('GET', 'https://comments-api.truewinter.dev/count');
+	xhr.open('GET', commentsAPI+'/count');
 	xhr.onload = function() {
 		var count = JSON.parse(this.responseText);
 		if (count.success) {
 			for (var i = 0; i < count.data.length; i++) {
-				var postURL = count.data[i]._id.split('-').slice(0,3).join('/') + '/' + count.data[i]._id.split('-').slice(3).join('-')
+				var postURL = count.data[i]._id.split('-').slice(0,3).join('/') + '/' + count.data[i]._id.split('-').slice(3).join('-'){% if dev %}+'.html'{% endif %};
 				console.log(postURL)
 				$('.post-link[href="/'+postURL+'"]').parent().parent().find('.post-meta').find('a').text($('.post-link[href="/'+postURL+'"]').parent().parent().find('.post-meta').find('a').text()+ ' ('+count.data[i].count+')');
 				$('.post-link[href="/'+postURL+'"]');
@@ -63,53 +64,4 @@ window.addEventListener('load', function() {
 	xhr.send();
 	
 });
-
-	//if (!(document.getElementsByTagName('article'))) return;
-/*	var a = document.getElementsByClassName('main-content')[0].children[1].children;
-var r = [];
-var q = [];
-var every = '300';
-for (var i=0;i<a.length;i++){
-	//if (a[i].nodeName==='P') {
-		console.log(a[i]);
-		r.push(a[i]);
-	//}
-}
-console.log(r);
-var cu = 0;
-var cc = 0;
-var ca = [];
-for (var c=0;c<r.length;c++){
-	console.log(r[c].clientHeight);
-	if (r[c].clientHeight<every) {
-		//console.log('C');
-		//r[c].addAfter = false;
-		//for (var l=0;l<r.length
-		cc += r[c].clientHeight;
-		if (cc > every) {
-			if (r[c].children.length > 0) {
-				if (r[c].children[0].nodeName=='IMG') {
-					continue;
-				}
-			} else {
-				console.log(r[c].children);
-				ca.push(r[c]);
-				cc = 0;
-			}
-		}
-	}
-}
-console.log(ca);
-for (var s=0;s<ca.length;s++){
-	//$0.parentNode.insertAdjacentHTML('afterEnd', 'Test');
-//<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-3285187781774116" data-ad-slot="5173263456" data-ad-format="auto" data-full-width-responsive="true"></ins>
-	ca[s].insertAdjacentHTML ("beforebegin", '<div class="ndt3-google-ad"><span style="font-size:small;">Advertisement</span><br/><ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-3285187781774116" data-ad-slot="5173263456" data-ad-format="auto" data-full-width-responsive="true"></ins></div>');
-}*/
-	/*var element = document.createElement("script");
-	element.src = "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js";*/
-	//document.body.appendChild(element);
-//for (var p=0;p<ca.length;p++) {
-	/*(adsbygoogle = window.adsbygoogle || []).push({});
-	(adsbygoogle = window.adsbygoogle || []).push({});*/
-//}
 </script>

@@ -1,19 +1,15 @@
 ---
 layout: default
 ---
-<article itemscope itemtype="http://schema.org/BlogPosting">
 
-  <!-- <header class="post-header">
-    <h1 class="post-title" itemprop="name headline">{{ page.title | escape }}</h1>
-    <p class="post-meta">
-      <time datetime="{{ page.date | date_to_xmlschema }}" itemprop="datePublished">
-        {% assign date_format = site.cayman-blog.date_format | default: "%b %-d, %Y" %}
-        {{ page.date | date: date_format }}
-      </time>
-      {% if page.author %}
-        • <span itemprop="author" itemscope itemtype="http://schema.org/Person"><span itemprop="name">{{ page.author }}</span></span>
-      {% endif %}</p>
-  </header> -->
+{% assign dev = false %}
+{% for static_file in site.static_files %}
+	{% if static_file.path == '/-DEV' %}
+		{% assign dev = true %}
+	{% endif %}
+{% endfor %}
+
+<article itemscope itemtype="http://schema.org/BlogPosting">
 
   <div itemprop="articleBody">
     {{ content }}
@@ -24,14 +20,6 @@ var mnh=0;
 var hn=0;
 if(mn=>60){hn=Math.floor(mn/60);mnh=mn-hn*60;}else{mnh=mn;}
 document.getElementById('rTime').innerText = ((hn?hn+(hn===1?' hour ':' hours '):'')+(mn%60===0?'':(mnh?mnh:mn)+(mnh===1?' minute':' minutes')));
-		  
-/*var wpm = 200;
-var words = document.getElementsByTagName('article')[0].innerText;
-var wordCount = words.split(' ').length;
-var rT = Math.round(wordCount / wpm);
-var rTm = rT.toString().split('.')[0] + ' minutes';
-console.log(rTm);
-document.getElementById('rTime').innerText = rTm;*/
 	    </script>
 	  <noscript>
 		  <style>
@@ -40,39 +28,11 @@ document.getElementById('rTime').innerText = rTm;*/
 			  }
 		  </style>
 	  </noscript>
-<!--<div class="ad" style="text-align: center;font-size: small;">Advertisement<center><iframe data-aa="887950" src="" data-src="//ad.a-ads.com/887950?size=300x250" scrolling="no" style="width:300px; height:250px; border:0px; padding:0;overflow:hidden" allowtransparency="true"></iframe></center></div>
-<noscript>
-<div class="ad-ns" style="text-align: center;font-size: small;">Advertisement<center><iframe data-aa="887950" src="//ad.a-ads.com/887950?size=300x250" scrolling="no" style="width:300px; height:250px; border:0px; padding:0;overflow:hidden" allowtransparency="true"></iframe></center></div>
-</noscript>-->
-<!--<h2 id="comments">Comments</h2>
-
-<div id="graphcomment"></div>
-<script type="text/javascript">
-
-  /* - - - CONFIGURATION VARIABLES - - - */
-
-  // make sure the id is yours
-  window.gc_params = {
-    graphcomment_id: 'TrueWinter',
-
-    // if your website has a fixed header, indicate it's height in pixels
-    fixed_header_height: 0,
-  };
-
-  /* - - - DON'T EDIT BELOW THIS LINE - - - */
-
-  
-  (function() {
-    var gc = document.createElement('script'); gc.type = 'text/javascript'; gc.async = true; gc.id = 'graphcommentScript';
-    gc.src = 'https://graphcomment.com/js/integration.js?' + Math.round(Math.random() * 1e8);
-    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(gc);
-  })();
-
-</script>-->
 
 <h2 id="comments">Comments</h2>
 
 <h3>Leave a comment</h3>
+<p>Please note that some comments may require moderation, as determined by Akismet. Read their <a href="https://akismet.com/privacy/" target="_blank">privacy policy</a> to learn more about how they process your data.</p>
 
 <form id="addComments">
 	<div id="comment-form-result"></div>
@@ -88,21 +48,48 @@ document.getElementById('rTime').innerText = rTm;*/
 	
 	<div class="form-group">
 		<textarea class="form-control commentsTextarea" maxlength="2000" id="commentsTextarea" placeholder="Comment" name="comment"></textarea>
+		<small style="float: right;"><span id="commentFormCharacterCount">0</span>/2000</small>
 	</div>
 	
 	<div class="form-group">
-		<div class="g-recaptcha d-inline-flex" data-sitekey="6LeIjiwUAAAAAJTldNRQIgPEgF-FF8Arsym0CFNW" data-theme="dark" data-callback="recaptchaCallback" data-expired-callback="recaptchaExpiredCallback"></div>
-		<script id="recaptcha-lazy" data-src="https://www.google.com/recaptcha/api.js"></script>
+		<div class="g-recaptcha-comment d-inline-flex" data-sitekey="6LeIjiwUAAAAAJTldNRQIgPEgF-FF8Arsym0CFNW" data-theme="dark" data-callback="recaptchaCallbackComment" data-expired-callback="recaptchaExpiredCallbackComment"></div>
 	</div>
 
 	<div class="form-group">
 		<button type="submit" class="btn btn-primary" id="comment-form-btn">Post Comment</button><span class="spinner-border text-success" role="status" id="comment-form-spinner" style="display:none;"></span>
 	</div>
 </form>
+<hr>
+<script id="recaptcha-lazy" data-src="https://www.google.com/recaptcha/api.js"></script>
 
 <style>.invalid-form-data{border:1px solid #f66!important;border-radius:3px!important}</style>
 <script>
+	{% if dev %}
+	var commentsAPI = 'http://localhost:8804';
+	{% else %}
+	var commentsAPI = 'https://comments-api.truewinter.dev';
+	{% endif %}
 	window.addEventListener('load', function() {
+		var commentFormCaptchaLoaded = false;
+		var commentCaptchaComplete = false;
+		window.recaptchaCommentFormOnload = function() {
+			grecaptcha.render($('.g-recaptcha-comment')[0], {'sitekey' : '6LeIjiwUAAAAAJTldNRQIgPEgF-FF8Arsym0CFNW'});
+		}
+		
+		$('#addComments').on('keydown', function() {
+			//console.log('test');
+			if (!commentFormCaptchaLoaded) {
+				if (!$('#recaptcha-lazy').attr('src')) {
+					$('#recaptcha-lazy').attr('src', $('#recaptcha-lazy').data('src')+'?onload=recaptchaCommentFormOnload');
+				} else {
+					recaptchaCommentFormOnload();
+				}
+				commentFormCaptchaLoaded = true;
+			}
+		});
+		$('#commentsTextarea').on('keyup', function() {
+			$('#commentFormCharacterCount').text($('#commentsTextarea').val().length);
+		});
 		$('#postId').val(location.pathname.slice(1).replace(/\//g, '-').replace('.html', ''));
 		$("#addComments").submit(function (e) {
 			e.preventDefault();
@@ -110,9 +97,9 @@ document.getElementById('rTime').innerText = rTm;*/
 			$('[name="email"]').first().removeClass('invalid-form-data');
 			$('[name="name"]').first().removeClass('invalid-form-data');
 			$('[name="comment"]').first().removeClass('invalid-form-data');
-			if (recaptcha) {
-				$(".g-recaptcha").first().removeClass('invalid-form-data');
-			}
+			//if (grecaptcha) {
+				$(".g-recaptcha-comment").first().removeClass('invalid-form-data');
+			//}
 			var red = "#F66";
 			if (!($('[name="email"]')[0].value.match(/^[a-zA-Z0-9-.]+@[a-zA-Z0-9-.]+\.[a-zA-Z]{2,6}$/gi))) {
 				$('[name="email"]').first().addClass('invalid-form-data');
@@ -126,12 +113,12 @@ document.getElementById('rTime').innerText = rTm;*/
 				$('[name="comment"]').first().addClass('invalid-form-data');
 				post = false;
 			}
-			if (grecaptcha) {
-				if (grecaptcha.getResponse() === "") {
-					$(".g-recaptcha").first().addClass('invalid-form-data');
+			//if (grecaptcha) {
+				if (!commentCaptchaComplete && commentFormCaptchaLoaded) {
+					$(".g-recaptcha-comment").first().addClass('invalid-form-data');
 					post = false;
 				}
-			}
+			//}
 			if (post) {
 				$('#comment-form-btn').hide();
 				$('#comment-form-spinner').show();
@@ -139,7 +126,7 @@ document.getElementById('rTime').innerText = rTm;*/
 					type: "POST",
 					data : $(this).serialize(),
 					cache: false,
-					url: 'https://comments-api.truewinter.dev/comment',
+					url: commentsAPI+'/comment',
 					success: function(data){
 						$('#comment-form-btn').show();
 						$('#comment-form-spinner').hide();
@@ -197,32 +184,21 @@ document.getElementById('rTime').innerText = rTm;*/
 
 		}
 		
-		function loadRecaptchaIfInViewport() {
-			if($('.g-recaptcha').isOnScreen()) {
-				if (!$('#recaptcha-lazy').attr('src')) {
-					$('#recaptcha-lazy').attr('src', $('#recaptcha-lazy').data('src'));
-				}
-			}
-		}
-		
-		$(window).on('scroll', function() {
-			loadRecaptchaIfInViewport();
-		});
-		
-		loadRecaptchaIfInViewport();
-		
-		window.recaptchaCallback = function() {
+		window.recaptchaCallbackComment = function() {
 			$(".g-recaptcha").first().removeClass('invalid-form-data');
+			commentCaptchaComplete = true;
 		}
 		
-		window.recaptchaExpiredCallback = function() {
+		window.recaptchaExpiredCallbackComment = function() {
 			$(".g-recaptcha").first().addClass('invalid-form-data');
+			commentCaptchaComplete = false;
 		}
 	});
 </script>
 
 <div id="tw-comments"></div>
 <span class="spinner-border text-success" role="status" id="comments-spinner" style="display:none;"></span>
+<button style="display:none;" class="btn btn-primary" id="load-more-btn">Load More</button>
 <div id="tw-reply-box">
 	<div id="replyModal" class="modal" tabindex="-1" role="dialog">
 		<div class="modal-dialog" role="document">
@@ -239,6 +215,7 @@ document.getElementById('rTime').innerText = rTm;*/
 						<input type="hidden" name="inReplyTo" id="tw-reply-form-reply-to">
 						<input type="hidden" name="inReplyType" id="tw-reply-form-reply-type">
 						<input type="hidden" name="inReplyPost" id="tw-reply-form-reply-post">
+						<input type="hidden" name="inReplyRootComment" id="tw-reply-form-root-comment">
 						<div class="form-group">
 							<input type="text" class="form-control" name="tw-rf-name" placeholder="Name" id="tw-reply-form-name">
 						</div>
@@ -246,7 +223,8 @@ document.getElementById('rTime').innerText = rTm;*/
 							<input type="email" class="form-control" name="tw-rf-email" placeholder="Email" id="tw-reply-form-email">
 						</div>
 						<div class="form-group">
-							<textarea name="tw-rf-comment" class="form-control" maxlength="2000" placeholder="Comment" id="tw-reply-form-comment"></textarea>
+							<textarea name="tw-rf-comment" id="replyTextarea" class="form-control" maxlength="2000" placeholder="Comment" id="tw-reply-form-comment"></textarea>
+							<small style="float: right;"><span id="replyFormCharacterCount">0</span>/2000</small>
 						</div>
 						<div class="form-group">
 							<div class="g-recaptcha-reply d-inline-flex" data-theme="dark" data-callback="recaptchaCallbackReply" data-expired-callback="recaptchaExpiredCallbackReply"></div>
@@ -290,7 +268,7 @@ document.getElementById('rTime').innerText = rTm;*/
 
 
 <script>
-function loadComments() {
+function loadCommentsInit() {
 	function getCookie(cname) {
 		var name = cname + "=";
 		var decodedCookie = decodeURIComponent(document.cookie);
@@ -319,9 +297,14 @@ function loadComments() {
 		$('#comment-reply-form').append(c2);
 		$('.active').css('border-bottom', '1px solid #a32bfe');
 	}
+}
+
+function loadComments(page) {
 	
+	if (!page) page = 1;
+
 	var xhr = new XMLHttpRequest();
-	xhr.open('GET', 'https://comments-api.truewinter.dev/comments/'+encodeURIComponent(btoa(location.pathname.slice(1).replace(/\//g, '-').replace('.html', ''))));
+	xhr.open('GET', commentsAPI+'/comments/'+encodeURIComponent(btoa(location.pathname.slice(1).replace(/\//g, '-').replace('.html', '')))+`?page=${page}`);
 	xhr.onload = function() {
 		$('#comments-spinner').hide();
 		var data = JSON.parse(this.responseText);
@@ -329,9 +312,10 @@ function loadComments() {
 			return document.getElementById('tw-comments').innerText = 'Failed to load comments';
 		}
 		
+		var metadata = data.metadata;
 		var twcomments = data.data.comments;
 		var replies = data.data.replies;
-		
+
 		function getReplies(id) {
 			var r = [];
 			for (var i = 0; i < replies.length; i++) {
@@ -470,6 +454,20 @@ function loadComments() {
 		function replyForm(e) {
 			e.preventDefault();
 			
+			$('#replyTextarea').on('keyup', function() {
+				$('#replyFormCharacterCount').text($('#replyTextarea').val().length);
+			});
+			
+			$('#replyModal').on('hidden.bs.modal', function (e) {
+				$('[name="tw-rf-name"]').val('');
+				$('[name="tw-rf-email"]').val('');
+				$('[name="tw-rf-comment"]').val('');
+				$('#tw-reply-form-reply-to').val('');
+				$('#tw-reply-form-reply-type').val('');
+				$('#tw-reply-form-reply-post').val('');
+				$('#tw-reply-form-root-comment').val('');
+			});
+			
 			var replyCaptchaComplete = false;
 			
 			$("#comment-reply-form").submit(function (e) {
@@ -478,11 +476,11 @@ function loadComments() {
 				$('[name="tw-rf-email"]').first().removeClass('invalid-form-data');
 				$('[name="tw-rf-name"]').first().removeClass('invalid-form-data');
 				$('[name="tw-rf-comment"]').first().removeClass('invalid-form-data');
-				if (recaptcha) {
+				//if (recaptcha) {
 					$(".g-recaptcha-reply").first().removeClass('invalid-form-data');
-				}
+				//}
 				var red = "#F66";
-				if (!($('[name="tw-rf-email"]')[0].value.match(/^[a-zA-Z0-9-.]+@[a-zA-Z0-9-.]+\.[a-zA-Z]{2,6}$/gi))) {
+				if (!($('[name="tw-rf-email"]')[0].value.match(/^[a-zA-Z0-9-.]+@[a-zA-Z0-9-.]+\.[a-zA-Z]{2,24}$/gi))) {
 					$('[name="tw-rf-email"]').first().addClass('invalid-form-data');
 					post = false;
 				}
@@ -494,13 +492,13 @@ function loadComments() {
 					$('[name="tw-rf-comment"]').first().addClass('invalid-form-data');
 					post = false;
 				}
-				if (grecaptcha) {
+				//if (grecaptcha) {
 					//if (grecaptcha.getResponse() === "") {
-					if (!replyCaptchaComplete) {
+					if (!replyCaptchaComplete && replyRecaptchaRendered) {
 						$(".g-recaptcha-reply").first().addClass('invalid-form-data');
 						post = false;
 					}
-				}
+				//}
 				if (post) {
 					$('#reply-form-btn').hide();
 					$('#reply-form-spinner').show();
@@ -508,7 +506,7 @@ function loadComments() {
 						type: "POST",
 						data : $(this).serialize(),
 						cache: false,
-						url: 'https://comments-api.truewinter.dev/reply',
+						url: commentsAPI+'/reply',
 						success: function(data){
 							$('#reply-form-btn').show();
 							$('#reply-form-spinner').hide();
@@ -546,11 +544,19 @@ function loadComments() {
 			$('#tw-reply-form-reply-to').val($(this).data('tw-crb-id'));
 			$('#tw-reply-form-reply-type').val($(this).data('tw-crb-type'));
 			$('#tw-reply-form-reply-post').val(location.pathname.slice(1).replace(/\//g, '-').replace('.html', ''));
+			$('#tw-reply-form-root-comment').val($(this).parents('.comment').data('comment-id'));
+			window.recaptchaReplyFormOnload = function() {
+				grecaptcha.render($('.g-recaptcha-reply')[0], {'sitekey' : '6LeIjiwUAAAAAJTldNRQIgPEgF-FF8Arsym0CFNW'});
+			}
 			if (!replyRecaptchaRendered) {
 				//console.log(replyRecaptchaRendered);
-				grecaptcha.render($('.g-recaptcha-reply')[0], {'sitekey' : '6LeIjiwUAAAAAJTldNRQIgPEgF-FF8Arsym0CFNW'});
+				if (!$('#recaptcha-lazy').attr('src')) {
+					$('#recaptcha-lazy').attr('src', $('#recaptcha-lazy').data('src')+'?onload=recaptchaReplyFormOnload');
+				} else {
+					recaptchaReplyFormOnload();
+				}
 				replyRecaptchaRendered = true;
-				window.rrr = replyRecaptchaRendered;
+				//window.rrr = replyRecaptchaRendered;
 			}
 			//if (!$('#recaptcha-reply-lazy').attr('src')) {
 				//$('#recaptcha-reply-lazy').attr('src', $('#recaptcha-reply-lazy').data('src'));
@@ -566,6 +572,13 @@ function loadComments() {
             }
 			$('#replyModal').modal('show');
 		}
+
+		//console.log(data);
+
+		if (data.success && metadata.page < metadata.pages) {
+			$('#load-more-btn').show();
+		}
+
 	}
 	xhr.send();
 }
@@ -576,6 +589,7 @@ window.addEventListener('load', function() {
 		if (commentsLoaded) return;
 		if($('#tw-comments').isOnScreen()) {
 			$('#comments-spinner').show();
+			loadCommentsInit();
 			loadComments();
 			commentsLoaded = true;
 		}
@@ -586,53 +600,18 @@ window.addEventListener('load', function() {
 	});
 	
 	loadCommentsIfInView();
+
+	var commentsPage = 1;
+	$('#load-more-btn').on('click', function() {
+		$('#load-more-btn').hide();
+		$('#comments-spinner').show();
+		loadComments(commentsPage+1);
+		commentsPage++;
+	});
 	
 });
 
 </script>
-
-<!--<div id="disqus_thread"></div>-->
-<!--<script>
-
-/**
-*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
-*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
-
-var disqus_config = function () {
-this.page.url = document.location.href.replace(document.location.search, '');  // Replace PAGE_URL with your page's canonical URL variable
-//this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
-};
-
-(function() { // DON'T EDIT BELOW THIS LINE
-var d = document, s = d.createElement('script');
-s.src = 'https://ndt3-blog.disqus.com/embed.js';
-s.setAttribute('data-timestamp', +new Date());
-(d.head || d.body).appendChild(s);
-})();
-</script>
-	<script src="/js/comments.js"></script>
-<div class="disqus"></div>
-<script>
-var dsq_options = {
-  scriptUrl: '//ndt3-blog.disqus.com/embed.js',
-  disqusConfig: function() {
-	this.page.url = document.location.href.replace(document.location.search, '').replace('ndt3.me', 'truewinter.dev');
-  }
-};
-
-disqusLoader( '.disqus', dsq_options );
-</script>
-<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-        <script id="dsq-count-scr" data-src="//ndt3-blog.disqus.com/count.js" async></script>                    
-	<script>
-		window.addEventListener('load', function() {
-			//$('#dsq-count-scr').attr('src', $('#dsq-count-scr').attr('data-src'));
-			document.getElementById('dsq-count-scr').setAttribute('src',document.getElementById('dsq-count-scr').getAttribute('data-src'));
-		});
-	  </script>
-  </div>
-	<script id="dsq-count-scr" data-src="https://ndt3-blog.disqus.com/count.js" async></script>-->
-
 	<script>
 		window.addEventListener('load', function() {
 			if (location.hash && $(location.hash).length > 0) {
