@@ -173,7 +173,7 @@ window.cookieconsent.initialise({
 		{% if dev %}
 			<script>console.log('Dev mode; analytics disabled');</script>
 		{% else %}
-		<script src="https://wd-static1.ndt3.me/js/gascrolltracking.js"></script>
+		<script src="https://cdn.truewinter.dev/c/tw/js/gascrolltracking.min.js"></script>
 		<script>
 			if (!(location.hash && location.hash === '#comments')) {
 				NdT3_GA_ST_init('{{ site.google_analytics }}', true);
