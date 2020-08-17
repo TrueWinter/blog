@@ -4,6 +4,7 @@ title: How And Why I Created My Own Comments System
 ---
 I recently changed my online name, and with that came a new website and blog design. Everything was going well, and the website looked good with the new dark theme. Except for one small design issue… The comments system I was using didn’t allow me to change the design.
 It tried to adjust it’s own colours to fit what I had, but some parts of it were still white, which didn’t really fit into the new design. But that wasn’t the big issue.
+
 If you ever opened your browser’s DevTools while loading my blog, you probably saw something like this…
 
 ![Requests with Disqus](/images/uploads/how-and-why-i-created-my-own-comments-system-yfaW7FjvcX.png)
@@ -377,4 +378,5 @@ The version of this comments system used on my blog includes many more features:
 - Verification mark when I comment 
 
 This started as a way to move away from the bloated, data-collecting Disqus. But it soon turned into a learning experience. I had used MongoDB once before, and that was with code someone else wrote. It was the first time I had to write the code to store and retrieve data from MongoDB myself, and the same is true for Akismet and Preact. If it wasn’t for this project, I probably wouldn’t have used these until my job required them.
+
 
