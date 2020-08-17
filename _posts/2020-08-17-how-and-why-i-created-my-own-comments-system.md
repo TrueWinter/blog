@@ -247,7 +247,7 @@ Next up, some HTML elements where everything will be added to:
 
 I used Bootstrap when designing, so if you aren’t using Bootstrap, you will need to add the spinner and CSS in manually.
 
-```javascript
+```jsx
     var commentsAPI = 'API_URL_HERE'; 
     var commentsArray = [];
     function loadComments(page) {
@@ -380,4 +380,5 @@ The version of this comments system used on my blog includes many more features:
 * Verification mark when I comment
 
 This started as a way to move away from the bloated, data-collecting Disqus. But it soon turned into a learning experience. I had used MongoDB once before, and that was with code someone else wrote. It was the first time I had to write the code to store and retrieve data from MongoDB myself, and the same is true for Akismet and Preact. If it wasn’t for this project, I probably wouldn’t have used these until my job required them.
+
 
