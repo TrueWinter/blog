@@ -247,6 +247,8 @@ Next up, some HTML elements where everything will be added to:
 
 I used Bootstrap when designing, so if you aren’t using Bootstrap, you will need to add the spinner and CSS in manually.
 
+And now to add the comments and replies to the page.
+
 ```jsx
     var commentsAPI = 'API_URL_HERE'; 
     var commentsArray = [];
@@ -336,7 +338,7 @@ I used Bootstrap when designing, so if you aren’t using Bootstrap, you will ne
     });
 ```
 
-I initially did this with a mess of `document.createElement()` and `elem.appendChild()`, but rewrote it using [Preact](https://preactjs.com/), a lightweight React alternative. This reduced the amount of code needed while making it really easy to see how the code would be added to the page. As a in-browser replacement for JSX, I used [HTM](https://github.com/developit/htm). If you’re looking for the changes to the code made during this rewrite, you can find them [here](https://l.truewinter.dev/tw-comments-preact-rewrite).
+This will send a request to the API to retrieve the comments for this post, and then add those to the page. I initially did this with a mess of `document.createElement()` and `elem.appendChild()`, but rewrote it using [Preact](https://preactjs.com/), a lightweight React alternative. This reduced the amount of code needed while making it really easy to see how the code would be added to the page. As a in-browser replacement for JSX, I used [HTM](https://github.com/developit/htm). If you’re looking for the changes to the code made during this rewrite, you can find them [here](https://l.truewinter.dev/tw-comments-preact-rewrite).
 
 At this point, you should now have a working comments system. But it doesn’t really look that good, so you’ll need to add some CSS to fix that.
 
@@ -380,5 +382,6 @@ The version of this comments system used on my blog includes many more features:
 * Verification mark when I comment
 
 This started as a way to move away from the bloated, data-collecting Disqus. But it soon turned into a learning experience. I had used MongoDB once before, and that was with code someone else wrote. It was the first time I had to write the code to store and retrieve data from MongoDB myself, and the same is true for Akismet and Preact. If it wasn’t for this project, I probably wouldn’t have used these until my job required them.
+
 
 
