@@ -41,3 +41,6 @@ article {
 .highlighter-rouge {
 	margin-bottom: 16px;
 }
+pre.highlight {
+    margin-bottom: 0 !important;
+}
