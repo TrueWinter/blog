@@ -96,12 +96,7 @@ document.getElementById('rTime').innerText = ((hn?hn+(hn===1?' hour ':' hours ')
 		$("#addComments").submit(function (e) {
 			e.preventDefault();
 			var post = true;
-			$('[name="email"]').first().removeClass('invalid-form-data');
-			$('[name="name"]').first().removeClass('invalid-form-data');
-			$('[name="comment"]').first().removeClass('invalid-form-data');
-			//if (grecaptcha) {
-				$(".g-recaptcha-comment").first().removeClass('invalid-form-data');
-			//}
+			$('#addComments')[0].reset();
 			var red = "#F66";
 			if (!($('[name="email"]')[0].value.match(/^[a-zA-Z0-9-.]+@[a-zA-Z0-9-.]+\.[a-zA-Z]{2,6}$/gi))) {
 				$('[name="email"]').first().addClass('invalid-form-data');
@@ -138,8 +133,10 @@ document.getElementById('rTime').innerText = ((hn?hn+(hn===1?' hour ':' hours ')
 						} else {
 							$("#comment-form-result")[0].style = "background-color:rgb(48, 48, 48);border-radius:5px;padding:10px;margin-bottom:8px;display:inline-block;color:white;";
 							$("#addComments")[0].reset();
-							location.hash = '#comments';
-							location.reload();
+							setTimeout(function() {
+								location.hash = '#comments';
+								location.reload();
+							}, 500);
 						}
 						if (grecaptcha) {
 							grecaptcha.reset();
@@ -301,6 +298,8 @@ function loadCommentsInit() {
 	}
 }
 
+var commentsArray = [];
+
 function loadComments(page) {
 	
 	if (!page) page = 1;
@@ -317,143 +316,71 @@ function loadComments(page) {
 		var metadata = data.metadata;
 		var twcomments = data.data.comments;
 		var replies = data.data.replies;
+	
+		// Start Preact rewrite
+		function Comment(props) {
+			return html`
+				<div data-comment-id="${props.id}" class="${props.type}">
+					<table>
+						<tr>
+							<td>
+								<img data-email-hash="${props.email_hash}" src="https://www.gravatar.com/avatar/${props.email_hash}?s=50&d=identicon" class="${props.type}-image" />
+							</td>
+							<td>
+								<div class="${props.type}-name">${props.name}${props.isTrueWinter && (html`<i class=\"the-truewinter fa fa-check-circle\" title=\"This is the real TrueWinter\"></i>`)}</div>
+								<div class="${props.type}-time">${props.time}
+									<span class="comment-reply">
+										<a href="#" class="comment-reply-btn" data-tw-crb-id="${props.id}" data-tw-crb-type="${props.type}">Reply</a>
+									</span>
+								</div>
+								<div class="${props.type}-text">${props.comment}</div>
+							</td>
+						</tr>
+					</table>
+					${repliesP(props.id)}
+				</div>
+			`;
+		}
 
-		function getReplies(id) {
-			var r = [];
-			for (var i = 0; i < replies.length; i++) {
-				if(replies[i].in_reply_to === id)  {
-					r.push(replies[i]);
+		function repliesP(id) {
+
+			function getRepliesP(id) {
+				var r = [];
+				for (var i = 0; i < replies.length; i++) {
+					if(replies[i].in_reply_to === id)  {
+						r.push(replies[i]);
+					}
+				}
+				return r;
+			}
+
+			var repliesArr = [];
+
+			function addRepliesP(id) {
+				var rp = getRepliesP(id);
+				//console.log(rp);
+
+				for (var i = 0; i < rp.length; i++) {
+					repliesArr.push(html`<${Comment} id=${rp[i].id} email_hash=${rp[i].email_hash} name=${rp[i].name} time=${rp[i].time} comment=${rp[i].comment} type="reply" isTrueWinter=${rp[i].isTrueWinter ? true : false} />`);
+					if (i === rp.length - 1) {
+						return repliesArr;
+					}
 				}
 			}
-			return r;
+			return addRepliesP(id);
 		}
 
-		function createCommentElement(comment) {
-			// Comment
-			var e = document.createElement('div');
-			e.setAttribute('data-comment-id', comment.id);
-			e.className = 'comment';
-			var tb = document.createElement('table');
-			var tr = document.createElement('tr');
-			var td1 = document.createElement('td');
-			td1.className = 'image-td';
-			var td2 = document.createElement('td');
-			var ei = document.createElement('img');
-			ei.setAttribute('data-email-hash', comment.email_hash);
-			ei.src = 'https://www.gravatar.com/avatar/'+comment.email_hash+'?s=50&d=identicon';
-			ei.className = 'comment-image';
-			var n = document.createElement('div');
-			if (comment.isTrueWinter) {
-				n.innerHTML = comment.name + "<i class=\"the-truewinter fa fa-check-circle\" title=\"This is the real TrueWinter\"></i>";
-			} else {
-				n.innerText = comment.name;
-			}
-			n.className = 'comment-name';
-			var t = document.createElement('div');
-			t.innerText = comment.time;
-			t.className = 'comment-time';
-			var cr = document.createElement('span');
-			cr.className = 'comment-reply';
-			var crb = document.createElement('a');
-			crb.href = '#';
-			crb.innerText = 'Reply';
-			crb.className = 'comment-reply-btn';
-			crb.setAttribute('data-tw-crb-id', comment.id);
-			crb.setAttribute('data-tw-crb-type', 'comment');
-			crb.onclick = replyForm;
-			cr.appendChild(crb);
-			t.appendChild(cr);
-			var c = document.createElement('div');
-			c.innerText = comment.comment;
-			c.className = 'comment-text';
-			td1.appendChild(ei);
-			td2.appendChild(n);
-			td2.appendChild(t);
-			td2.appendChild(c);
-			tr.appendChild(td1);
-			tr.appendChild(td2);
-			tb.appendChild(tr);
-			e.appendChild(tb);
-			
-			document.getElementById('tw-comments').appendChild(e);
-			
-			addReplies(comment.id);
-			
-		}
-
-		function addReplies(id) {
-			var rp = getReplies(id);
-			//console.log(rp);
-			
-			for (var i = 0; i < rp.length; i++) {
-				//console.log('reply');
-				$('[data-comment-id=\''+id+'\']').append(createReplyElement(rp[i]));
-				
-				addReplies(rp[i].id);
-				
-			}
-		}
-
-		function createReplyElement(reply) {
-			var e = document.createElement('div');
-			e.setAttribute('data-comment-id', reply.id);
-			e.setAttribute('data-in-reply-to', reply.in_reply_to);
-			e.className = 'reply';
-			var tb = document.createElement('table');
-			var tr = document.createElement('tr');
-			var td1 = document.createElement('td');
-			td1.className = 'image-td';
-			var td2 = document.createElement('td');
-			var ei = document.createElement('img');
-			ei.setAttribute('data-email-hash', reply.email_hash);
-			ei.src = 'https://www.gravatar.com/avatar/'+reply.email_hash+'?s=50&d=identicon';
-			ei.className = 'reply-image';
-			var n = document.createElement('div');
-			if (reply.isTrueWinter) {
-				n.innerHTML = reply.name + "<i class=\"the-truewinter fa fa-check-circle\" title=\"This is the real TrueWinter\"></i>";
-			} else {
-				n.innerText = reply.name;
-			}
-			n.className = 'reply-name';
-			var t = document.createElement('div');
-			t.innerText = reply.time;
-			t.className = 'reply-time';
-			var cr = document.createElement('span');
-			cr.className = 'comment-reply';
-			var crb = document.createElement('a');
-			crb.href = '#';
-			crb.innerText = 'Reply';
-			crb.className = 'comment-reply-btn';
-			crb.setAttribute('data-tw-crb-id', reply.id);
-			crb.setAttribute('data-tw-crb-type', 'reply');
-			crb.onclick = replyForm;
-			cr.appendChild(crb);
-			t.appendChild(cr);
-			var c = document.createElement('div');
-			c.innerText = reply.comment;
-			c.className = 'reply-text';
-			td1.appendChild(ei);
-			td2.appendChild(n);
-			td2.appendChild(t);
-			td2.appendChild(c);
-			tr.appendChild(td1);
-			tr.appendChild(td2);
-			tb.appendChild(tr);
-			e.appendChild(tb);
-			return e;
-		}
-
+		const html = htm.bind(preact.h);
+		
 		for (var i = 0; i < twcomments.length; i++) {
-			//console.log('Comment:');
-			//console.log(comments[i]);
-			createCommentElement(twcomments[i]);
-			//console.log('Replies:');
-			//console.log(getReplies(comments[i].id));
+			commentsArray.push(html`<${Comment} id=${twcomments[i].id} email_hash=${twcomments[i].email_hash} name=${twcomments[i].name} time=${twcomments[i].time} comment=${twcomments[i].comment} type="comment" isTrueWinter=${twcomments[i].isTrueWinter ? true : false} />`);
 		}
+
+		preact.render(commentsArray, $('#tw-comments')[0]);
 		
 		var replyRecaptchaRendered = false;
 
-		function replyForm(e) {
+		$('.comment-reply-btn').on('click', function(e) {
 			e.preventDefault();
 			
 			$('#replyTextarea').on('keyup', function() {
@@ -461,13 +388,11 @@ function loadComments(page) {
 			});
 			
 			$('#replyModal').on('hidden.bs.modal', function (e) {
-				$('[name="tw-rf-name"]').val('');
-				$('[name="tw-rf-email"]').val('');
-				$('[name="tw-rf-comment"]').val('');
 				$('#tw-reply-form-reply-to').val('');
 				$('#tw-reply-form-reply-type').val('');
 				$('#tw-reply-form-reply-post').val('');
 				$('#tw-reply-form-root-comment').val('');
+				$('#comment-reply-form')[0].reset();
 			});
 			
 			var replyCaptchaComplete = false;
@@ -475,12 +400,7 @@ function loadComments(page) {
 			$("#comment-reply-form").submit(function (e) {
 				e.preventDefault();
 				var post = true;
-				$('[name="tw-rf-email"]').first().removeClass('invalid-form-data');
-				$('[name="tw-rf-name"]').first().removeClass('invalid-form-data');
-				$('[name="tw-rf-comment"]').first().removeClass('invalid-form-data');
-				//if (recaptcha) {
-					$(".g-recaptcha-reply").first().removeClass('invalid-form-data');
-				//}
+				$('#comment-reply-form').find('.invalid-form-data').removeClass('invalid-form-data');
 				var red = "#F66";
 				if (!($('[name="tw-rf-email"]')[0].value.match(/^[a-zA-Z0-9-.]+@[a-zA-Z0-9-.]+\.[a-zA-Z]{2,24}$/gi))) {
 					$('[name="tw-rf-email"]').first().addClass('invalid-form-data');
@@ -573,7 +493,7 @@ function loadComments(page) {
 				replyCaptchaComplete = false;
             }
 			$('#replyModal').modal('show');
-		}
+		});
 
 		//console.log(data);
 
@@ -585,7 +505,39 @@ function loadComments(page) {
 	xhr.send();
 }
 
+var preactLoad = false;
+var htmLoad = false;
+
+var preactAndHTMLoadedEvent = new Event('preactAndHTMLoadedEvent');
+
+function preactLoaded() {
+	console.log('Preact loaded');
+	preactLoad = true;
+	if (preactLoad && htmLoad) {
+		window.dispatchEvent(preactAndHTMLoadedEvent);
+	}
+}
+function htmLoaded() {
+	console.log('HTM loaded');
+	htmLoad = true;
+	if (preactLoad && htmLoad) {
+		window.dispatchEvent(preactAndHTMLoadedEvent);
+	}
+}
+
+function loadScript(url, onloadFn) {
+	var e = document.createElement('script');
+	e.src = url;
+	e.onload = onloadFn;
+	document.body.appendChild(e);
+}
+
 window.addEventListener('load', function() {
+	loadScript('https://cdnjs.cloudflare.com/ajax/libs/preact/10.4.7/preact.min.js', preactLoaded);
+	loadScript('https://cdnjs.cloudflare.com/ajax/libs/htm/3.0.4/htm.min.js', htmLoaded);
+});
+
+window.addEventListener('preactAndHTMLoadedEvent', function() {
 	var commentsLoaded = false;
 	function loadCommentsIfInView() {
 		if (commentsLoaded) return;
