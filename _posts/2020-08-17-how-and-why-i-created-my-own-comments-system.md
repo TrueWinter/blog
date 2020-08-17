@@ -37,6 +37,7 @@ Before I continue, there are some things which you should keep in mind:
 
 A comments system wouldn’t be a comments system without a way to post comments. So, here’s the code for that.
 
+```javascript
     app.post('/comment', function (req, res) {
     	const collection = client.db(dbName).collection("comments");			
     	var document = {
@@ -56,10 +57,12 @@ A comments system wouldn’t be a comments system without a way to post comments
     		res.json({success: false, message: 'Error while inserting data'}); 
     	});			
     });
+```
 
 Pretty simple code. All it does is take what is sent in the form, add some more details (the user’s hashed email address for showing Gravatar pictures, the time, and an ID), and add it to the database. This can easily be changed to include other data, such as the user’s IP address (useful for some features of spam filters) but I don’t want to store data like that in my database.
 Next up is the code for replies. I wanted people to be able to leave replies to comments, there’s really no point in allowing people to leave comments but not reply to others.
 
+```javascript
     app.post('/reply', function (req, res) {
     	const collection = client.db(dbName).collection("replies");
     	
@@ -83,11 +86,12 @@ Next up is the code for replies. I wanted people to be able to leave replies to 
     		res.json({success: false, message: 'Error while inserting data'});
     	});
     });
-
+```
 It is mostly the same as the code for posting comments, with two additions. `inReplyTo` is the comment (or reply) that the user replied to. `inReplyRootComment` is used for pagination, but I’ll come back to that later.
 
 And now for a way to retrieve the comments and replies from the database.
 
+```javascript
     app.get('/comments/:post', function(req, res) {
     	var pageNum = parseInt(req.query.page);
     	if (!req.query.page) pageNum = 1;
@@ -154,6 +158,7 @@ And now for a way to retrieve the comments and replies from the database.
     	});
     	
     });
+```
 
 What this does, is get all the comments from the database, then loop through these to get the `in_reply_root_comment`. Then, only the replies that match one of these are retrieved from the database and added to the response.
 
@@ -161,6 +166,7 @@ For the other programmers reading this and wondering why I’m using the `commen
 
 And lastly, if you want to add the number of comments that a post has on your blog’s homepage, this is the code for you.
 
+```javascript
     app.get('/count', function(req,res) {
     	var commentArr = [];
     	
@@ -205,6 +211,7 @@ And lastly, if you want to add the number of comments that a post has on your bl
     		});
     	});
     });
+```
 
 Again, there’s probably a better way to do this and I’m sure someone will send me a message with improved code.
 
@@ -214,6 +221,7 @@ Now for the code that shows the comments on the blog.
 
 Let’s do the smallest bit of code first, this is for showing the number of comments each post has on the home page.
 
+```javascript
     var commentsAPI = 'API_URL_HERE'; 
     var xhr = new XMLHttpRequest();
     xhr.open('GET', commentsAPI+'/count');
@@ -227,15 +235,19 @@ Let’s do the smallest bit of code first, this is for showing the number of com
     	}
     }
     xhr.send();
+```
 
 Next up, some HTML elements where everything will be added to:
 
+```html
     <div id="tw-comments"></div>
     <span class="spinner-border text-success" role="status" id="comments-spinner" style="display:none;"></span>
     <button style="display:none;" class="btn btn-primary" id="load-more-btn">Load More</button>
+```
 
 I used Bootstrap when designing, so if you aren’t using Bootstrap, you will need to add the spinner and CSS in manually.
 
+```javascript
     var commentsAPI = 'API_URL_HERE'; 
     var commentsArray = [];
     function loadComments(page) {
@@ -322,11 +334,13 @@ I used Bootstrap when designing, so if you aren’t using Bootstrap, you will ne
     	loadComments(commentsPage+1);
     	commentsPage++;
     });
+```
 
 I initially did this with a mess of `document.createElement()` and `elem.appendChild()`, but rewrote it using [Preact](https://preactjs.com/), a lightweight React alternative. This reduced the amount of code needed while making it really easy to see how the code would be added to the page. As a in-browser replacement for JSX, I used [HTM](https://github.com/developit/htm). If you’re looking for the changes to the code made during this rewrite, you can find them [here](https://l.truewinter.dev/tw-comments-preact-rewrite).
 
 At this point, you should now have a working comments system. But it doesn’t really look that good, so you’ll need to add some CSS to fix that.
 
+```css
     .comment {
         margin-bottom: 8px;
     }
@@ -350,6 +364,7 @@ At this point, you should now have a working comments system. But it doesn’t r
     .image-td {
     	vertical-align: top;
     }
+```
 
 You will need to add your own comment and reply forms to fit with the design of your blog.
 While you are free to use this code to make your own comments system, please add a link to this post (or just my website) if you do.
@@ -365,3 +380,4 @@ The version of this comments system used on my blog includes many more features:
 * Verification mark when I comment
 
 This started as a way to move away from the bloated, data-collecting Disqus. But it soon turned into a learning experience. I had used MongoDB once before, and that was with code someone else wrote. It was the first time I had to write the code to store and retrieve data from MongoDB myself, and the same is true for Akismet and Preact. If it wasn’t for this project, I probably wouldn’t have used these until my job required them.
+
