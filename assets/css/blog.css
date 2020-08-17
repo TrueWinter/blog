@@ -38,3 +38,6 @@ article {
     font-size: x-large;
     color: #a32bfe;
 }
+.highlighter-rouge {
+	margin-bottom: 16px;
+}
