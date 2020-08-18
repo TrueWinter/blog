@@ -16,6 +16,7 @@ When I initially looked for a comments system to add to my blog, I chose Disqus 
 If you didn’t know already, I live in South Africa and internet here is not cheap (it’s even more expensive for me as I don’t live close to the city). While I have uncapped internet at home, I know many people that don’t and I also often check my blog when I’m not at home on an even more expensive mobile data connection. I didn’t like that my blog was loading megabytes of files just to display comments and I know some of my more privacy-conscious followers wouldn’t like what data is sent back to and processed by Disqus (they’re owned by a marketing company, which explains a lot).
 
 I needed to find a way to make my website as small and fast as possible, and reduce privacy issues (and before you start commenting about how I’m using Google Analytics, I do have plans to change to a self-hosted analytics solution but can’t afford another server now). I tried many services, and while they sent less requests, they still loaded megabytes of files.
+
 After not being happy with the Disqus alternatives that I found, I decided to make my own. It would give me more control over how the data is stored, how the comments are displayed, and how fast my blog loads (I am still in the process of improving the site load time). I would be solving all the issues I had with Disqus.
 
 And here are the results from DevTools…
@@ -277,7 +278,7 @@ And now to add the comments and replies to the page.
     								<img data-email-hash="${props.email_hash}" src="https://www.gravatar.com/avatar/${props.email_hash}?s=50&d=identicon" class="${props.type}-image" />
     							</td>
     							<td>
-    								<div class="${props.type}-name">${props.name}${props.isTrueWinter && (html`<i class=\"the-truewinter fa fa-check-circle\" title=\"This is the real TrueWinter\"></i>`)}</div>
+    								<div class="${props.type}-name">${props.name}</div>
     								<div class="${props.type}-time">${props.time}
     									<span class="comment-reply">
     										<a href="#" class="comment-reply-btn" data-tw-crb-id="${props.id}" data-tw-crb-type="${props.type}">Reply</a>
@@ -311,7 +312,7 @@ And now to add the comments and replies to the page.
     				//console.log(rp);
     
     				for (var i = 0; i < rp.length; i++) {
-    					repliesArr.push(html`<${Comment} id=${rp[i].id} email_hash=${rp[i].email_hash} name=${rp[i].name} time=${rp[i].time} comment=${rp[i].comment} type="reply" isTrueWinter=${rp[i].isTrueWinter ? true : false} />`);
+    					repliesArr.push(html`<${Comment} id=${rp[i].id} email_hash=${rp[i].email_hash} name=${rp[i].name} time=${rp[i].time} comment=${rp[i].comment} type="reply" />`);
     					if (i === rp.length - 1) {
     						return repliesArr;
     					}
@@ -323,7 +324,7 @@ And now to add the comments and replies to the page.
     		const html = htm.bind(preact.h);
     		
     		for (var i = 0; i < twcomments.length; i++) {
-    			commentsArray.push(html`<${Comment} id=${twcomments[i].id} email_hash=${twcomments[i].email_hash} name=${twcomments[i].name} time=${twcomments[i].time} comment=${twcomments[i].comment} type="comment" isTrueWinter=${twcomments[i].isTrueWinter ? true : false} />`);
+    			commentsArray.push(html`<${Comment} id=${twcomments[i].id} email_hash=${twcomments[i].email_hash} name=${twcomments[i].name} time=${twcomments[i].time} comment=${twcomments[i].comment} type="comment" />`);
     		}
     		preact.render(commentsArray, $('#tw-comments')[0]);
     }
@@ -382,6 +383,7 @@ The version of this comments system used on my blog includes many more features:
 * Verification mark when I comment
 
 This started as a way to move away from the bloated, data-collecting Disqus. But it soon turned into a learning experience. I had used MongoDB once before, and that was with code someone else wrote. It was the first time I had to write the code to store and retrieve data from MongoDB myself, and the same is true for Akismet and Preact. If it wasn’t for this project, I probably wouldn’t have used these until my job required them.
+
 
 
 
