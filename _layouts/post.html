@@ -497,7 +497,7 @@ function loadComments(page) {
 
 		//console.log(data);
 
-		if (data.success && data.metadata.page < data.metadata.pages) {
+		if (data.success && data.metadata && data.metadata.page < data.metadata.pages) {
 			$('#load-more-btn').show();
 		}
 
