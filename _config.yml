@@ -25,7 +25,7 @@ url: "https://blog.truewinter.dev" # the base hostname & protocol for your site,
 twitter_username: TrueWinter1
 github_username:  TrueWinter
 google_analytics: UA-104398508-3
-image: /assets/img/tw-temp-new-logo-sq-v2-64.jpg
+image: /assets/img/logo_64.jpg
 
 # Build settings
 markdown: kramdown
