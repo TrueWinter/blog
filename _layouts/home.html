@@ -27,10 +27,10 @@ layout: default
 		<li>
 
 			<h2>
-				<a class="post-link" href="{{ post.url | relative_url }}" title="{{ post.title }}">{{ post.title | escape }}</a>
+				<a class="post-link" href="{{ post.url | relative_url | replace: ".html","" }}" title="{{ post.title }}">{{ post.title | escape }}</a>
 			</h2>
 		    {% assign date_format = "%b %-d, %Y" %}
-			<span class="post-meta">{{ post.date | date: date_format }} | <a href="{{ post.url }}#comments">Comments</a></span>
+			<span class="post-meta">{{ post.date | date: date_format }} | <a href="{{ post.url | replace: ".html","" }}#comments">Comments</a></span>
 
 			<span>{{ post.excerpt | markdownify | truncatewords: 25 }}</span>
 
