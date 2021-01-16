@@ -2,5 +2,9 @@
 	"cleanUrls": true,
 	"github": {
 		"silent": true
-	}
+	},
+	"redirects": [
+		{ "source": "/auth", "destination": "/api/auth", "permanent": false }
+	]
+	
 }
