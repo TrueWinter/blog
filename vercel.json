@@ -4,7 +4,8 @@
 		"silent": true
 	},
 	"redirects": [
-		{ "source": "/auth", "destination": "/api/auth", "permanent": false }
+		{ "source": "/auth", "destination": "/api/auth", "permanent": false },
+		{ "source": "/admin", "destination": "/admin/", "permanent": false }
 	]
 	
 }
