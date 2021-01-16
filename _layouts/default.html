@@ -60,31 +60,18 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 	<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
     <!--<link rel="stylesheet" href="{{ '/assets/css/style.css?v=' | append: site.github.build_revision | relative_url }}">-->
-    <link rel="stylesheet" href="/assets/bootstrap/css/bootstrap.min.css">
+    <!--<link rel="stylesheet" href="/assets/bootstrap/css/bootstrap.min.css">-->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/4.5.0/darkly/bootstrap.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic&amp;display=swap">
-    <link rel="stylesheet" href="/assets/fonts/fontawesome-all.min.css">
-    <link rel="stylesheet" href="/assets/css/styles.min.css">
+    <link rel="stylesheet" class="tw-ll" data-href="/assets/fonts/fontawesome-all.min.css">
+    <!--<link rel="stylesheet" href="/assets/css/styles.min.css">
 	<link rel="stylesheet" href="/assets/css/blog.css">
-	<link rel="stylesheet" href="/assets/css/rouge.css">
-	<link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.3/cookieconsent.min.css" />
-	<script src="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.3/cookieconsent.min.js"></script>
-<script>
-window.addEventListener("load", function(){
-window.cookieconsent.initialise({
-  "palette": {
-    "popup": {
-      "background": "#000"
-    },
-    "button": {
-      "background": "#f1d600"
-    }
-  },
-  "theme": "classic",
-  "content": {
-    "href": "https://truewinter.dev/legal/privacy"
-  }
-})});
-</script>
+	<link rel="stylesheet" href="/assets/css/rouge.css">-->
+	<link rel="stylesheet" href="https://cdn.truewinter.dev/c/tw/blog/css/styles.min.css">
+	<link rel="stylesheet" href="https://cdn.truewinter.dev/c/tw/blog//css/blog.css">
+	<link rel="stylesheet" href="https://cdn.truewinter.dev/c/tw/blog//css/rouge.css">
+	<link rel="stylesheet" type="text/css" class="tw-ll" data-href="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.3/cookieconsent.min.css" />
+	<script class="tw-ll" onload="initCookieConsent()" data-src="https://cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.3/cookieconsent.min.js"></script>
   </head>
   <body>
 
@@ -143,11 +130,10 @@ window.cookieconsent.initialise({
                         <h3>Some heading here...</h3>
                         <ul>
                         	<li><a href="https://status.truewinter.dev" target="_blank">Status</a></li>
-				<li><a href="https://cv.truewinter.dev" target="_blank">CV</a></li>
+							<li><a href="https://cv.truewinter.dev" target="_blank">CV</a></li>
                         	<li><a href="https://truewinter.dev/dn42" target="_blank">DN42</a></li>
                         	<li><a href="https://truewinter.dev/reflinks" target="_blank">Referral Links</a></li>
-                        	<li><a href="https://donate.truewinter.dev" target="_blank">Donate</a></li>
-				<li><a href="https://phishtest.truewinter.dev" target="_blank" target="_blank">PhishTest</a></li>
+							<li><a href="https://phishtest.truewinter.dev" target="_blank" target="_blank">PhishTest</a></li>
                         	<li><a href="https://somebody-on.cc" target="_blank">somebody-on.cc&nbsp;</a><a href="https://truewinter.dev/somebody-on.cc" target="_blank">(why?) </a></li>
                         </ul>
                     </div>
@@ -188,8 +174,45 @@ window.cookieconsent.initialise({
 <script>
 var myLazyLoad = new LazyLoad({elements_selector: ".lazy"});
 </script>
-	<script src="/assets/js/jquery.min.js"></script>
-    <script src="/assets/bootstrap/js/bootstrap.min.js"></script>
+	<!--<script src="/assets/js/jquery.min.js"></script>
+    <script src="/assets/bootstrap/js/bootstrap.min.js"></script>-->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/js/bootstrap.min.js"></script>
     <script src="/assets/js/script.min.js"></script>
+	<script>
+		window.addEventListener('load', function() {
+			var twLL = document.getElementsByClassName('tw-ll');
+			
+			for (var i = 0; i < twLL.length; i++) {
+				var dataResourceURL = twLL[i].dataset.href || twLL[i].dataset.src;
+				console.log(dataResourceURL);
+				var re = /\/.[a-z0-9.-]+\.([a-z]+)$/gm;
+				var type = re.exec(dataResourceURL)[1];
+				
+				if (type === 'css') {
+					twLL[i].href = twLL[i].dataset.href;
+				} else if (type === 'js') {
+					twLL[i].src = twLL[i].dataset.src;
+				}
+			}
+		});
+		
+		function initCookieConsent() {
+			window.cookieconsent.initialise({
+				"palette": {
+					"popup": {
+						"background": "#000"
+					},
+					"button": {
+						"background": "#f1d600"
+					}
+				},
+				"theme": "classic",
+				"content": {
+					"href": "https://truewinter.dev/legal/privacy"
+				}
+			});
+		}
+	</script>
   </body>
 </html>
