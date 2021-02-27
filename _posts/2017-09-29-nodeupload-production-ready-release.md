@@ -2,7 +2,7 @@
 layout: post
 title: NodeUpload Production Ready Release
 ---
-For quite a while now, I have been working on a file sharing Node.JS app called [NodeUpload](https://ndt3.me/r/nodeupload). At version 4 of NodeUpload, I decided that it seemed stable enough after fixing a bug to be marked as production ready. Please note that even though I would consider it production ready, there may still be some issues that you can [submit as an issue on GitHub](https://github.com/NdT3Development/NodeUpload/issues). Now that it is in version 5, I thought that it would be a good time to write a blog post.
+For quite a while now, I have been working on a file sharing Node.JS app called [NodeUpload](https://github.com/TrueWinter/nodeupload). At version 4 of NodeUpload, I decided that it seemed stable enough after fixing a bug to be marked as production ready. Please note that even though I would consider it production ready, there may still be some issues that you can [submit as an issue on GitHub](https://github.com/TrueWinter/NodeUpload/issues). Now that it is in version 5, I thought that it would be a good time to write a blog post.
 
 You probably have some questions about NodeUpload...
 
@@ -12,7 +12,7 @@ You probably have some questions about NodeUpload...
 
 > Does it have support for ShareX?
 
-   Yes it does! Please look at [the ShareX section of the docs](https://nodeupload.ndt3.me/#sharex-configuration) for more details.
+   Yes it does! Please look at [the ShareX section of the docs](https://nodeupload.truewinter.dev/#sharex-configuration) for more details.
 
 > How are uploads done?
 
@@ -44,19 +44,19 @@ You probably have some questions about NodeUpload...
 
 > Is there any way to change the responses (console output, web responses, etc.)?
 
-   Yes, there is. Edit the `strings.json` file. The placeholders (`{{placeholder}}`) in these cannot be used in all strings. The code will have to be changed if you want to add these into strings that do not have support for it. Please see [the docs](https://nodeupload.ndt3.me) for more details.
+   Yes, there is. Edit the `strings.json` file. The placeholders (`{{placeholder}}`) in these cannot be used in all strings. The code will have to be changed if you want to add these into strings that do not have support for it. Please see [the docs](https://nodeupload.truewinter.dev) for more details.
 
 > Can I contribute to the development of NodeUpload by opening pull requests?
    
-   Yes, you can open a pull request but please use the format [here](https://github.com/NdT3Development/nodeupload/blob/master/PULL_REQUESTS.md)
+   Yes, you can open a pull request but please use the format [here](https://github.com/TrueWinter/nodeupload/blob/master/PULL_REQUESTS.md)
 
 > I found a bug, how do I report it?
 
-   To report a bug, open an issue using the format [here](https://github.com/NdT3Development/nodeupload/blob/master/BUGS.md)
+   To report a bug, open an issue using the format [here](https://github.com/TrueWinter/nodeupload/blob/master/BUGS.md)
 
 > Can I request a feature?
 
-   Yes, I am open to feedback and feature requests. Just open an issue using the format [here](https://github.com/NdT3Development/nodeupload/blob/master/FEATURE_REQUESTS.md)
+   Yes, I am open to feedback and feature requests. Just open an issue using the format [here](https://github.com/TrueWinter/nodeupload/blob/master/FEATURE_REQUESTS.md)
 
 > Why was NodeUpload only 'production ready' in version 4.0.0?
 
@@ -64,7 +64,8 @@ You probably have some questions about NodeUpload...
 
 
 
-For more info, please [go to the NodeUpload GitHub repository](https://ndt3.me/r/nodeupload)
+For more info, please [go to the NodeUpload GitHub repository](https://github.com/TrueWinter/nodeupload)
+
 
 
 
