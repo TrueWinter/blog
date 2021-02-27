@@ -20,10 +20,11 @@ If we expand that, we get 2a0e:8f02:f019:0101:0000:0000:0000:0000. Let’s look 
 
 I have an iptables rule to redirect all requests to this prefix to a Node.js app which checks the hostname and changes the displayed page accordingly.
 
-Here’s opening lyrics to Bohemian Rhapsody in blue on a cyan background.
+Here’s the opening lyrics to Bohemian Rhapsody in blue on a cyan background.
 
 ![Bohemian Rhapsody](/images/uploads/colour-based-on-ipv6-addresses-42bae6.png)
 
 Want to see that for yourself? It’s available at [2a0e:8f02:f019:101:555:ff:ff00:ff](http://[2a0e:8f02:f019:101:555:ff:ff00:ff]). The background colour is #00ffff and text colour is #0000ff.
 
 The source code for this project is available on GitHub at [https://github.com/AS211869/ipv6-colour](https://github.com/AS211869/ipv6-colour).
+
