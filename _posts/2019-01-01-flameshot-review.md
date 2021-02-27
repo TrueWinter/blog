@@ -20,9 +20,9 @@ The UI is quite nice and it has a few features that I need. Although it doesn’
 There are some things that I dislike about it:
 * By default, it can only upload to Imgur. You can write a script that will upload it to another host when you press the save button.
 * Unless I’m missing something, the configuration app doesn’t allow for setting global keyboard shortcuts. You will need to set the keyboard shortcuts from your OS’ settings to run a command:
- * `flameshot gui`: for taking screenshots with the GUI
- *  `/path/to/your/custom/script`: if you need it to upload to another host, or need to do something with the picture after capturing it
- * Other commands: [https://github.com/lupoDharkael/flameshot#usage](https://github.com/lupoDharkael/flameshot#usage)
+  * `flameshot gui`: for taking screenshots with the GUI
+  *  `/path/to/your/custom/script`: if you need it to upload to another host, or need to do something with the picture after capturing it
+  * Other commands: [https://github.com/lupoDharkael/flameshot#usage](https://github.com/lupoDharkael/flameshot#usage)
 * It isn’t as feature rich as ShareX
 * The blur feature doesn’t hide all the text. You need to blur something twice for it to actually hide sensitive information (found that out after I screenshotted a copying bug in Ubuntu and the filename was visible)
 * There isn’t a way to move objects you added to the screenshot (like arrows) so you will have to undo if you make a mistake
@@ -30,3 +30,4 @@ There are some things that I dislike about it:
 Even with the list above, Flameshot is still quite a good software for taking screenshots on Linux and appears to be under active development with new features in development.
 
 If you need to take screenshots in Linux, I recommend to try Flameshot.
+
