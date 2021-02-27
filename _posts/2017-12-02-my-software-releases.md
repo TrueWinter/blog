@@ -39,13 +39,10 @@ Before I end off this article, I just want to say that I have social media accou
 
 **Twitter:** [NdT3\_](https://twitter.com/NdT3_)
 
-**Support Server on [Discord](https://discordapp.com)** *(Multiple links given, all go to the invite link)*:
+**Support Server on [Discord](https://discordapp.com)**:
 
-[https://ndt3.me/r/discord](https://ndt3.me/r/discord) or
-[https://l.ndt3.me/ndt3-discord](https://l.ndt3.me/ndt3-discord) or
 [https://discord.gg/scHhZcK](https://discord.gg/scHhZcK)
 
-I also accept donations on Patreon: [My Patreon Page](https://patreon.com/NdT3)
 
 
 
