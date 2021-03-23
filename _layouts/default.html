@@ -122,40 +122,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 		  {{ content }}
 	</div>
 	
-	<div class="footer-dark">
-		<footer>
-			<div class="container">
-				<div class="row">
-					<div class="col-sm-6 col-md-3 item">
-						<h3>Some heading here...</h3>
-						<ul>
-							<li><a href="https://status.truewinter.dev" target="_blank">Status</a></li>
-							<li><a href="https://cv.truewinter.dev" target="_blank">CV</a></li>
-							<li><a href="https://truewinter.dev/dn42" target="_blank">DN42</a></li>
-							<li><a href="https://as211869.net" target="_blank">AS211869</a></li>
-							<li><a href="https://phishtest.truewinter.dev" target="_blank">PhishTest</a></li>
-						</ul>
-					</div>
-					<div class="col-sm-6 col-md-3 item">
-						<h3>Legal</h3>
-						<ul>
-							<li><a href="https://truewinter.dev/legal/privacy">Privacy Policy</a></li>
-							<li><a href="https://truewinter.dev/legal/security">Security</a></li>
-							<li><a href="https://truewinter.dev/legal/disclaimer">Email Disclaimer</a></li>
-						</ul>
-					</div>
-					<div class="col-md-6 item text">
-						<h3>TrueWinter</h3>
-						<p>I'm probably more well-known by my previous online name, NdT3, but I never really liked that name.</p>
-					</div>
-					<div class="col item social">
-						<div class="social-icons"><a target="_blank" href="https://github.com/TrueWinter"><i class="fab fa-github"></i></a><a target="_blank" href="https://twitter.com/TrueWinter1"><i class="fab fa-twitter"></i></a><a target="_blank" href="https://blog.truewinter.dev/"><i class="fas fa-blog"></i></a><a target="_blank" href="https://discord.com/invite/scHhZcK"><i class="fab fa-discord"></i></a></div>
-					</div>
-				</div>
-				<p class="copyright">Nicholis du Toit © 2020 - {{ site.time | date: '%Y' }}</p>
-			</div>
-		</footer>
-	</div>
+	<!-- Footer is generated on one of my servers using my website as its source -->
+	{{ site.data.footer.html }}
 
     {% if site.google_analytics %}
 		{% if dev %}

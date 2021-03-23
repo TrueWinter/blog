@@ -36,6 +36,11 @@ highlighter: rouge
 plugins:
   - jekyll-feed
   - jekyll-sitemap
+  - jekyll-get-json
+
+jekyll_get_json:
+  - data: footer
+    json: 'https://sync-html.nicholis.co.za/footer'
 
 # Exclude from processing.
 # The following items will not be processed, by default. Create a custom list
