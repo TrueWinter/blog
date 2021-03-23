@@ -125,18 +125,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 	<!-- Footer is generated on one of my servers using my website as its source -->
 	{{ site.data.footer.html }}
 
-    {% if site.google_analytics %}
-		{% if dev %}
-			<script>console.log('Dev mode; analytics disabled');</script>
-		{% else %}
-		<script src="https://cdn.truewinter.dev/c/tw/js/gascrolltracking.min.js"></script>
-		<script>
-			if (!(location.hash && location.hash === '#comments')) {
-				NdT3_GA_ST_init('{{ site.google_analytics }}', true);
-            }
-		</script>
-		{% endif %}
-    {% endif %}
 <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-lazyload/12.0.3/lazyload.min.js"></script>
 <script>
 var myLazyLoad = new LazyLoad({elements_selector: ".lazy"});
@@ -181,5 +169,12 @@ var myLazyLoad = new LazyLoad({elements_selector: ".lazy"});
 			});
 		}
 	</script>
+	{% if site.analytics %}
+		{% if dev %}
+			<script>console.log('Dev mode; analytics disabled');</script>
+		{% else %}
+		<!-- Cloudflare Web Analytics --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "92ba758fbbab4ec889f43390cb2cf916"}'></script><!-- End Cloudflare Web Analytics -->
+		{% endif %}
+	{% endif %}
   </body>
 </html>
