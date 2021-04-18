@@ -12,19 +12,21 @@ I spent a few minutes coming up with ideas for those 4 characters and settled on
 
 At this point, you probably want to know how it all works. Below is the prefix allocated to this project:
 
-2a0e:8f02:f019:101::/64
+2a0e:8f02:2151:101::/64
 
-If we expand that, we get 2a0e:8f02:f019:0101:0000:0000:0000:0000. Let’s look at the last 4 groups. The first 4 characters are for the text ID, allowing the user to select which text they’d like. If the selected ID doesn’t exist, a random text file will be chosen. The next 6 characters are for the background colour, and the final 6 are for the text colour.
+If we expand that, we get 2a0e:8f02:2151:0101:0000:0000:0000:0000. Let’s look at the last 4 groups. The first 4 characters are for the text ID, allowing the user to select which text they’d like. If the selected ID doesn’t exist, a random text file will be chosen. The next 6 characters are for the background colour, and the final 6 are for the text colour.
 
-![Project IPv6 Prefix](/images/uploads/colour-based-on-ipv6-addresses-EXCEL_X3HQtt944z.png)
+
+![Project IPv6 Prefix](/images/uploads/colour-based-on-ipv6-addresses-EXCEL_seAOiSFpBk.png)
 
 I have an iptables rule to redirect all requests to this prefix to a Node.js app which checks the hostname and changes the displayed page accordingly.
 
 Here’s the opening lyrics to Bohemian Rhapsody in blue on a cyan background.
 
-![Bohemian Rhapsody](/images/uploads/colour-based-on-ipv6-addresses-42bae6.png)
+![Bohemian Rhapsody](/images/uploads/colour-based-on-ipv6-addresses-firefox_qDeb6MkJsS.png)
 
-Want to see that for yourself? It’s available at [2a0e:8f02:f019:101:555:ff:ff00:ff](http://[2a0e:8f02:f019:101:555:ff:ff00:ff]). The background colour is #00ffff and text colour is #0000ff.
+Want to see that for yourself? It’s available at [2a0e:8f02:2151:101:555:ff:ff00:ff](http://[2a0e:8f02:2151:101:555:ff:ff00:ff]). The background colour is #00ffff and text colour is #0000ff.
 
 The source code for this project is available on GitHub at [https://github.com/AS211869/ipv6-colour](https://github.com/AS211869/ipv6-colour).
+
 
