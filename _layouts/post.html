@@ -78,6 +78,13 @@ document.getElementById('rTime').innerText = ((hn?hn+(hn===1?' hour ':' hours ')
 			grecaptcha.render($('.g-recaptcha-comment')[0], {'sitekey' : '6LeIjiwUAAAAAJTldNRQIgPEgF-FF8Arsym0CFNW'});
 		}
 		
+		var commentSubmitMsg = sessionStorage.getItem('comment-submit-msg');
+		if (commentSubmitMsg) {
+			$("#comment-form-result")[0].style = "background-color:rgb(48, 48, 48);border-radius:5px;padding:10px;margin-bottom:8px;display:inline-block;color:white;";
+			$("#comment-form-result").text(commentSubmitMsg);
+			sessionStorage.removeItem('comment-submit-msg');
+		}
+		
 		$('#addComments').on('keydown', function() {
 			//console.log('test');
 			if (!commentFormCaptchaLoaded) {
@@ -96,7 +103,9 @@ document.getElementById('rTime').innerText = ((hn?hn+(hn===1?' hour ':' hours ')
 		$("#addComments").submit(function (e) {
 			e.preventDefault();
 			var post = true;
-			$('#addComments')[0].reset();
+			
+			$('#addComments').find('.invalid-form-data').removeClass('invalid-form-data');
+			
 			var red = "#F66";
 			if (!($('[name="email"]')[0].value.match(/^[a-zA-Z0-9-.]+@[a-zA-Z0-9-.]+\.[a-zA-Z]{2,6}$/gi))) {
 				$('[name="email"]').first().addClass('invalid-form-data');
@@ -127,17 +136,18 @@ document.getElementById('rTime').innerText = ((hn?hn+(hn===1?' hour ':' hours ')
 					success: function(data){
 						$('#comment-form-btn').show();
 						$('#comment-form-spinner').hide();
-						$("#comment-form-result").html(data.message);
+						
+						$("#comment-form-result").text(data.message);
 						if (data.success === false) {
 							$("#comment-form-result")[0].style = "background-color:"+red+";border-radius:5px;padding:10px;margin-bottom:8px;color:white;";
 						} else {
 							$("#comment-form-result")[0].style = "background-color:rgb(48, 48, 48);border-radius:5px;padding:10px;margin-bottom:8px;display:inline-block;color:white;";
 							$("#addComments")[0].reset();
-							setTimeout(function() {
-								location.hash = '#comments';
-								location.reload();
-							}, 500);
+							sessionStorage.setItem('comment-submit-msg', data.message);
+							location.hash = '#comments';
+							location.reload();
 						}
+
 						if (grecaptcha) {
 							grecaptcha.reset();
 						}
@@ -392,6 +402,7 @@ function loadComments(page) {
 				$('#tw-reply-form-reply-type').val('');
 				$('#tw-reply-form-reply-post').val('');
 				$('#tw-reply-form-root-comment').val('');
+				$('#comment-reply-form').find('.invalid-form-data').removeClass('invalid-form-data');
 				$('#comment-reply-form')[0].reset();
 			});
 			
@@ -432,16 +443,19 @@ function loadComments(page) {
 						success: function(data){
 							$('#reply-form-btn').show();
 							$('#reply-form-spinner').hide();
-							$("#reply-form-result").html(data.message);
+
+							$("#reply-form-result").text(data.message);
 							if (data.success === false) {
 								$("#reply-form-result")[0].style = "background-color:"+red+";border-radius:5px;padding:10px;margin-bottom:8px;color:white;";
 							} else {
 								$("#reply-form-result")[0].style = "background-color:rgb(48, 48, 48);border-radius:5px;padding:10px;margin-bottom:8px;display:inline-block;color:white;";
 								$("#comment-reply-form")[0].reset();
 								$('#replyModal').modal('hide');
+								sessionStorage.setItem('comment-submit-msg', data.message);
 								location.hash = '#comments';
 								location.reload();
 							}
+
 							if (grecaptcha) {
 								grecaptcha.reset();
 							}
